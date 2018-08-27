@@ -1,14 +1,30 @@
 package housemarket.rodolforoca.com.Model;
 
 import java.util.Objects;
+import javax.persistence.*;
 
+@Entity
 public class Endereco {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int id;
+
+    @Column(nullable = false)
     public String rua;
+
+    @Column(nullable = false)
     public int numero;
+
+    @Column(nullable = false)
     public String bairro;
+
     public String complemento;
+
+    @Column(nullable = false)
     public String cidade;
+
+    @Column(nullable = false)
     public String uf;
 
     public Endereco(String rua, int numero, String bairro, String complemento, String cidade, String uf) {
@@ -19,6 +35,10 @@ public class Endereco {
         this.cidade = cidade;
         this.uf = uf;
     }
+
+    public Endereco() {
+    }
+
 
     public int getId() {
         return id;

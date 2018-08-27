@@ -3,10 +3,7 @@ package housemarket.rodolforoca.com.Model;
 
 import housemarket.rodolforoca.com.Enums.TipoAnunciante;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 
@@ -21,7 +18,10 @@ public class Usuario {
     private String nome;
 
 //    public TipoAnunciante tipo;
-//    public Endereco endereco;
+
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Endereco endereco;
 
     private String telefone;
 
@@ -70,6 +70,14 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public String getTelefone() {
