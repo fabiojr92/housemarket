@@ -4,6 +4,7 @@ package housemarket.rodolforoca.com.Model;
 import housemarket.rodolforoca.com.Enums.TipoAnunciante;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 
@@ -11,10 +12,11 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int id;
     private String email;
     private String senha;
-    private Boolean logado;
+    private int active;
     private String nome;
 
 //    public TipoAnunciante tipo;
@@ -24,6 +26,10 @@ public class Usuario {
     private Endereco endereco;
 
     private String telefone;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public Usuario(String nome) {
         this.nome = nome;
@@ -56,12 +62,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Boolean getLogado() {
-        return logado;
+    public int getActive() {
+        return active;
     }
 
-    public void setLogado(Boolean logado) {
-        this.logado = logado;
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public String getNome() {
@@ -86,5 +92,13 @@ public class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
-    List<Usuario> findByEmail(String email);
+    Usuario findByEmail(String email);
 }

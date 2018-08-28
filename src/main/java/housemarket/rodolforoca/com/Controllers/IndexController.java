@@ -1,13 +1,16 @@
 package housemarket.rodolforoca.com.Controllers;
 
 import housemarket.rodolforoca.com.DAO.EnderecoRepository;
+import housemarket.rodolforoca.com.DAO.RoleRepository;
 import housemarket.rodolforoca.com.DAO.UsuarioRepository;
 import housemarket.rodolforoca.com.Model.Endereco;
+import housemarket.rodolforoca.com.Model.Role;
 import housemarket.rodolforoca.com.Model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
@@ -22,12 +25,18 @@ public class IndexController {
     UsuarioRepository usuarioRepository;
 
     @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
     EnderecoRepository enderecoRepository;
 
-
-    @RequestMapping("/index")
+    @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
     public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="Wooorld!!!") String name) {
         model.addAttribute("name", name);
+        Role role = new Role();
+        role.setRole("ADMIN");
+
+        roleRepository.save(role);
 //        System.out.println(dataSource);
 //        Usuario usuario = new Usuario("Roca");
 //
