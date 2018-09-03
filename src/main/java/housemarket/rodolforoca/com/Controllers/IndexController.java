@@ -7,6 +7,8 @@ import housemarket.rodolforoca.com.Model.Endereco;
 import housemarket.rodolforoca.com.Model.Role;
 import housemarket.rodolforoca.com.Model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,6 @@ public class IndexController {
 
     @Autowired
     DataSource dataSource;
-
-    @Autowired
-    UsuarioRepository usuarioRepository;
 
     @Autowired
     RoleRepository roleRepository;
