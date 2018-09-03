@@ -8,24 +8,25 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int id;
+    @Column(name = "endereco_id")
+    private int id;
 
     @Column(nullable = false)
-    public String rua;
+    private String rua;
 
     @Column(nullable = false)
-    public int numero;
+    private int numero;
 
     @Column(nullable = false)
-    public String bairro;
+    private String bairro;
 
-    public String complemento;
-
-    @Column(nullable = false)
-    public String cidade;
+    private String complemento;
 
     @Column(nullable = false)
-    public String uf;
+    private String cidade;
+
+    @Column(nullable = false)
+    private String uf;
 
     public Endereco(String rua, int numero, String bairro, String complemento, String cidade, String uf) {
         this.rua = rua;

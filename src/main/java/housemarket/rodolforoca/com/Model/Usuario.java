@@ -22,7 +22,7 @@ public class Usuario {
 //    public TipoAnunciante tipo;
 
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
     private String telefone;
