@@ -54,39 +54,39 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.rua')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.rua')}? 'has-error'">
                             <label>Rua</label>
-                            <input type="text" class="form-control input-sm" th:field="*{endereco.rua}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.rua}" maxlength="150" placeholder="Informe o título"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.numero')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.numero')}? 'has-error'">
                             <label>Número</label>
-                            <input type="text" class="form-control input-sm" th:field="*{endereco.numero}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.numero}" maxlength="150" placeholder="Informe o título"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.bairro')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.bairro')}? 'has-error'">
                             <label>Bairro</label>
-                            <input type="text" class="form-control input-sm" th:field="*{endereco.bairro}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.bairro}" maxlength="150" placeholder="Informe o título"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.complemento')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.complemento')}? 'has-error'">
                             <label>Complemento</label>
-                            <input type="text" class="form-control input-sm" th:field="*{endereco.complemento}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.complemento}" maxlength="150" placeholder="Informe o título"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.cidade')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.cidade')}? 'has-error'">
                             <label>Cidade</label>
-                            <input type="text" class="form-control input-sm" th:field="*{endereco.cidade}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.cidade}" maxlength="150" placeholder="Informe o título"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.uf')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.uf')}? 'has-error'">
                             <label>Estado (UF)</label>
-                            <input type="checkbox" class="form-select-button" th:field="*{endereco.uf}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-select-button" th:field="*{imovel.endereco.uf}" maxlength="150" placeholder="Informe o título"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -116,19 +116,19 @@
                     <div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.temPiscina')}? 'has-error'">
                             <label>Tem piscina</label>
-                            <input type="checkbox" class="form-control input-sm" th:field="*{imovel.temPiscina}" autofocus="autofocus" placeholder="Informe o autor" maxlength="50"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.temPiscina}" autofocus="autofocus" placeholder="Informe o autor" maxlength="50"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.temChurrasqueira')}? 'has-error'">
                             <label>Tem churrasqueira</label>
-                            <input type="checkbox" class="form-control input-sm" th:field="*{imovel.temChurrasqueira}" autofocus="autofocus" placeholder="Informe o autor" maxlength="50"/>
+                            <input type="text" class="form-control input-sm" th:field="*{imovel.temChurrasqueira}" autofocus="autofocus" placeholder="Informe o autor" maxlength="50"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('observacao')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('observacoes')}? 'has-error'">
                             <label>Telefone</label>
-                            <textarea class="form-control input-sm" th:field="*{observacao}" cols="5" rows="5" placeholder="Informe o texto"></textarea>
+                            <textarea class="form-control input-sm" th:field="*{observacoes}" cols="5" rows="5" placeholder="Informe o texto"></textarea>
                         </div>
                     </div>
                 </fieldset>

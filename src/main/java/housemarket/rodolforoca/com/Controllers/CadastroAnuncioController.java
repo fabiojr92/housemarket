@@ -1,10 +1,7 @@
 package housemarket.rodolforoca.com.Controllers;
 
 import housemarket.rodolforoca.com.DAO.EnderecoRepository;
-import housemarket.rodolforoca.com.Model.Anuncio;
-import housemarket.rodolforoca.com.Model.Endereco;
-import housemarket.rodolforoca.com.Model.Role;
-import housemarket.rodolforoca.com.Model.Usuario;
+import housemarket.rodolforoca.com.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,7 +19,10 @@ public class CadastroAnuncioController {
     @RequestMapping("/cadastro-anuncio")
     public ModelAndView cadastro(Anuncio anuncio) {
         ModelAndView mv = new ModelAndView("/cadastroAnuncio");
-
+        Endereco endereco = new Endereco();
+        Imovel imovel = new Imovel();
+        imovel.setEndereco(endereco);
+        anuncio.setImovel(imovel);
         mv.addObject("anuncio", anuncio);
         return mv;
     }
