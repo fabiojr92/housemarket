@@ -36,7 +36,9 @@ public class CadastroAnuncianteController {
     @RequestMapping("/cadastro-anunciante")
     public ModelAndView cadastro(Usuario usuario) {
         ModelAndView mv = new ModelAndView("/cadastroAnunciante");
-        usuario.setEndereco(new Endereco());
+        if (usuario.getEndereco() == null) {
+            usuario.setEndereco(new Endereco());
+        }
         mv.addObject("usuario", usuario);
         return mv;
     }
@@ -60,19 +62,19 @@ public class CadastroAnuncianteController {
         return mv;
     }
 
-    public Usuario findUserByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
-
-    public void saveUser(Usuario user) {
-        user.setSenha(bCryptPasswordEncoder.encode(user.getSenha()));
-        user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        if(userRole == null) {
-            userRole = new Role("ADMIN");
-            roleRepository.save(userRole);
-        }
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        usuarioRepository.save(user);
-    }
+//    public Usuario findUserByEmail(String email) {
+//        return usuarioRepository.findByEmail(email);
+//    }
+//
+//    public void saveUser(Usuario user) {
+//        user.setSenha(bCryptPasswordEncoder.encode(user.getSenha()));
+//        user.setActive(1);
+//        Role userRole = roleRepository.findByRole("ADMIN");
+//        if(userRole == null) {
+//            userRole = new Role("ADMIN");
+//            roleRepository.save(userRole);
+//        }
+//        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+//        usuarioRepository.save(user);
+//    }
 }
