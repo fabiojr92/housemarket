@@ -1,21 +1,31 @@
 package housemarket.rodolforoca.com.Controllers;
 
-import housemarket.rodolforoca.com.DAO.EnderecoRepository;
-import housemarket.rodolforoca.com.Model.*;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import housemarket.rodolforoca.com.DAO.AnuncioRepository;
+import housemarket.rodolforoca.com.DAO.EnderecoRepository;
+import housemarket.rodolforoca.com.Model.Anuncio;
+import housemarket.rodolforoca.com.Model.Endereco;
+import housemarket.rodolforoca.com.Model.Imovel;
+import housemarket.rodolforoca.com.Model.Usuario;
 
 @Controller
 public class CadastroAnuncioController {
 
     @Autowired
-    EnderecoRepository enderecoRepository;
-
+    private EnderecoRepository enderecoRepository;
+    
+    @Autowired
+    private AnuncioRepository an;
+    
+    
     @RequestMapping("/cadastro-anuncio")
     public ModelAndView cadastro(Anuncio anuncio) {
         ModelAndView mv = new ModelAndView("/cadastroAnuncio");
@@ -27,9 +37,9 @@ public class CadastroAnuncioController {
         return mv;
     }
 
-    @RequestMapping("/salvar-anuncio")
-    public ModelAndView salvar(@Valid Usuario usuario, BindingResult result) {
-        ModelAndView mv = new ModelAndView("/cadastroAnuncio");
+ //   @RequestMapping("/salvar-anuncio")
+ //   public ModelAndView salvar(@Valid Usuario usuario, BindingResult result) {
+ //       ModelAndView mv = new ModelAndView("/cadastroAnuncio");
 //        mv.addObject("usuario", usuario);
 //        usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
 //        usuario.setActive(1);
@@ -43,6 +53,35 @@ public class CadastroAnuncioController {
 //        enderecoRepository.save(usuario.getEndereco());
 //        usuarioRepository.save(usuario);
 
-        return mv;
+ //       return mv;
+ //   }
+    
+    @RequestMapping("/salvar-anuncio")
+    public String salvar(Anuncio anuncio) {
+      	
+    	an.save(anuncio.getImovel());
+    	
+    	an.save(anuncio);
+    	
+    	return "redirect:/index";
+   }
+    
+    @RequestMapping("/delete")
+    public String deletar(int id) {
+    	Anuncio anuncio = (Anuncio) an.findById(id);
+    	an.delete(anuncio);
+    	
+    	return "redirect:/index";
+    }
+    
+    @RequestMapping("/index")
+    public ModelAndView listaAnuncios() {
+    	ModelAndView mv = new ModelAndView("index");
+    	Iterable<Anuncio> anuncio = an.findAll();
+    	mv.addObject("anuncio", anuncio);
+    	
+    	return mv;
     }
 }
+    
+

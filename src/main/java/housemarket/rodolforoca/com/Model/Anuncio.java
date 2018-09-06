@@ -24,7 +24,7 @@ public class Anuncio {
     @JoinColumn(name = "imovel_id")
     private Imovel imovel;
 
-    private int tipo;
+    private String tipo;
 
 //    public String fotos;
 
@@ -71,11 +71,11 @@ public class Anuncio {
         this.imovel = imovel;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }

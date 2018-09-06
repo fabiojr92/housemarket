@@ -17,25 +17,26 @@ public class Imovel {
     private Endereco endereco;
 
     @Column(nullable = false)
-    private int tipo;
+    private String tipo;
 
     @Column(name = "area_total")
-    private int areaTotalM2;
+    private String areaTotalM2;
 
     @Column(name = "area_construida")
-    private int areaConstruidaM2;
+    private String areaConstruidaM2;
 
     @Column(name = "qtd_quartos")
-    private int qtdQuartos;
+    private String qtdQuartos;
 
     @Column(name = "qtd_vagas")
-    private int qtdVagasGaragem;
+    private String qtdVagasGaragem;
 
     @Column(name = "tem_piscina")
-    private boolean temPiscina;
+    private String temPiscina;
 
     @Column(name = "tem_churrasqueira")
-    private boolean temChurrasqueira;
+    private String temChurrasqueira;
+    
     private String descricao;
 
     public Imovel() {
@@ -57,59 +58,59 @@ public class Imovel {
         this.endereco = endereco;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
-    public int getAreaTotalM2() {
+    public String getAreaTotalM2() {
         return areaTotalM2;
     }
 
-    public void setAreaTotalM2(int areaTotalM2) {
+    public void setAreaTotalM2(String areaTotalM2) {
         this.areaTotalM2 = areaTotalM2;
     }
 
-    public int getAreaConstruidaM2() {
+    public String getAreaConstruidaM2() {
         return areaConstruidaM2;
     }
 
-    public void setAreaConstruidaM2(int areaConstruidaM2) {
+    public void setAreaConstruidaM2(String areaConstruidaM2) {
         this.areaConstruidaM2 = areaConstruidaM2;
     }
 
-    public int getQtdQuartos() {
+    public String getQtdQuartos() {
         return qtdQuartos;
     }
 
-    public void setQtdQuartos(int qtdQuartos) {
+    public void setQtdQuartos(String qtdQuartos) {
         this.qtdQuartos = qtdQuartos;
     }
 
-    public int getQtdVagasGaragem() {
+    public String getQtdVagasGaragem() {
         return qtdVagasGaragem;
     }
 
-    public void setQtdVagasGaragem(int qtdVagasGaragem) {
+    public void setQtdVagasGaragem(String qtdVagasGaragem) {
         this.qtdVagasGaragem = qtdVagasGaragem;
     }
 
-    public boolean isTemPiscina() {
+    public String getTemPiscina() {
         return temPiscina;
     }
 
-    public void setTemPiscina(boolean temPiscina) {
+    public void setTemPiscina(String temPiscina) {
         this.temPiscina = temPiscina;
     }
 
-    public boolean isTemChurrasqueira() {
+    public String getTemChurrasqueira() {
         return temChurrasqueira;
     }
 
-    public void setTemChurrasqueira(boolean temChurrasqueira) {
+    public void setTemChurrasqueira(String temChurrasqueira) {
         this.temChurrasqueira = temChurrasqueira;
     }
 

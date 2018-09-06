@@ -1,11 +1,9 @@
 package housemarket.rodolforoca.com.Controllers;
 
-import housemarket.rodolforoca.com.DAO.EnderecoRepository;
-import housemarket.rodolforoca.com.DAO.RoleRepository;
-import housemarket.rodolforoca.com.DAO.UsuarioRepository;
-import housemarket.rodolforoca.com.Model.Endereco;
-import housemarket.rodolforoca.com.Model.Role;
-import housemarket.rodolforoca.com.Model.Usuario;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,10 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
+import housemarket.rodolforoca.com.DAO.EnderecoRepository;
+import housemarket.rodolforoca.com.DAO.RoleRepository;
+import housemarket.rodolforoca.com.Model.Role;
 
 @Controller
 public class IndexController {
@@ -64,12 +63,13 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
-    }
+//    @RequestMapping(value="/logout", method = RequestMethod.GET)
+//    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null){
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+//    }
+      
 }
