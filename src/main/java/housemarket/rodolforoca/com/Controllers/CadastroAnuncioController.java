@@ -1,12 +1,9 @@
 package housemarket.rodolforoca.com.Controllers;
 
-import javax.validation.Valid;
-
+import housemarket.rodolforoca.com.DAO.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import housemarket.rodolforoca.com.DAO.AnuncioRepository;
@@ -14,16 +11,18 @@ import housemarket.rodolforoca.com.DAO.EnderecoRepository;
 import housemarket.rodolforoca.com.Model.Anuncio;
 import housemarket.rodolforoca.com.Model.Endereco;
 import housemarket.rodolforoca.com.Model.Imovel;
-import housemarket.rodolforoca.com.Model.Usuario;
 
 @Controller
 public class CadastroAnuncioController {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
-    
+
     @Autowired
-    private AnuncioRepository an;
+    private ImovelRepository imovelRepository;
+
+    @Autowired
+    private AnuncioRepository anuncioRepository;
     
     
     @RequestMapping("/cadastro-anuncio")
@@ -58,30 +57,22 @@ public class CadastroAnuncioController {
     
     @RequestMapping("/salvar-anuncio")
     public String salvar(Anuncio anuncio) {
-      	
-    	an.save(anuncio.getImovel());
-    	
-    	an.save(anuncio);
+      	enderecoRepository.save(anuncio.getImovel().getEndereco());
+      	imovelRepository.save(anuncio.getImovel());
+    	anuncioRepository.save(anuncio);
     	
     	return "redirect:/index";
    }
     
     @RequestMapping("/delete")
     public String deletar(int id) {
-    	Anuncio anuncio = (Anuncio) an.findById(id);
-    	an.delete(anuncio);
+    	Anuncio anuncio = (Anuncio) anuncioRepository.findById(id);
+    	anuncioRepository.delete(anuncio);
     	
     	return "redirect:/index";
     }
     
-    @RequestMapping("/index")
-    public ModelAndView listaAnuncios() {
-    	ModelAndView mv = new ModelAndView("index");
-    	Iterable<Anuncio> anuncio = an.findAll();
-    	mv.addObject("anuncio", anuncio);
-    	
-    	return mv;
-    }
+
 }
     
 

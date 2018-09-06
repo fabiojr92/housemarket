@@ -10,6 +10,4 @@ import java.util.List;
 public interface AnuncioRepository extends CrudRepository<Anuncio, Long> {
 
     List<Anuncio> findById(int id);
-
-	void save(Imovel imovel);
 }

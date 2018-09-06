@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import housemarket.rodolforoca.com.DAO.AnuncioRepository;
+import housemarket.rodolforoca.com.DAO.ImovelRepository;
+import housemarket.rodolforoca.com.Model.Anuncio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +32,13 @@ public class IndexController {
     RoleRepository roleRepository;
 
     @Autowired
-    EnderecoRepository enderecoRepository;
+    private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private ImovelRepository imovelRepository;
+
+    @Autowired
+    private AnuncioRepository anuncioRepository;
 
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
     public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="Wooorld!!!") String name) {
@@ -71,5 +80,22 @@ public class IndexController {
 //        }
 //        return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 //    }
-      
+    @RequestMapping("/index")
+    public ModelAndView listaAnuncios() {
+        ModelAndView mv = new ModelAndView("index");
+        Iterable<Anuncio> anuncio = anuncioRepository.findAll();
+        mv.addObject("anuncio", anuncio);
+
+        return mv;
+    }
+
+//    @RequestMapping("/delete")
+//    public String deletar(int id) {
+//        Anuncio anuncio = (Anuncio) anuncioRepository.findById(id);
+//        anuncioRepository.delete(anuncio);
+//        imovelRepository.delete(anuncio.getImovel());
+//        enderecoRepository.delete(anuncio.getImovel().getEndereco());
+//
+//        return "redirect:/index";
+//    }
 }
