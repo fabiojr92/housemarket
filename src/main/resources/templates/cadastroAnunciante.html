@@ -103,7 +103,7 @@
                             <div class="form-group row">
                                 <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.numero')}? 'has-error'">
                                     <label>Número</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{endereco.numero}" maxlength="150" placeholder="Informe o número"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{endereco.numero}" maxlength="150" placeholder="Informe o número"/>
                                 </div>
                             </div>
                             

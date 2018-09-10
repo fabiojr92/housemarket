@@ -9,6 +9,7 @@ import housemarket.rodolforoca.com.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,9 @@ public class IndexController {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private AnuncioRepository anuncioRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 //    @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
 //    public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="Wooorld!!!") String name) {
@@ -71,6 +75,9 @@ public class IndexController {
         roleRepository.save(role);
 
         Usuario usuario = new Usuario("Roca");
+        usuario.setEmail("rod@roc.com");
+        usuario.setSenha("1234");
+        usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
 
         Endereco endereco = new Endereco();
 

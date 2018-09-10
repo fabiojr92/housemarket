@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.endereco.numero')}? 'has-error'">
                                     <label>Número</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.numero}" maxlength="150" placeholder="Informe o número"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{imovel.endereco.numero}" maxlength="150" placeholder="Informe o número"/>
                                 </div>
                                 <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.bairro')}? 'has-error'">
                                     <label>Bairro</label>
@@ -129,19 +129,19 @@
                                 
                                 <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.areaTotalM2')}? 'has-error'">
                                     <label>Área total (M²)</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{imovel.areaTotalM2}" autofocus="autofocus" placeholder="Informe o tamanho em M²" maxlength="50"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{imovel.areaTotalM2}" autofocus="autofocus" placeholder="Informe o tamanho em M²" maxlength="50"/>
                                 </div>
                                 <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.areaConstruidaM2')}? 'has-error'">
                                     <label>Área construída (M²)</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{imovel.areaConstruidaM2}" autofocus="autofocus" placeholder="Informe o tamanho em M²" maxlength="50"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{imovel.areaConstruidaM2}" autofocus="autofocus" placeholder="Informe o tamanho em M²" maxlength="50"/>
                                 </div>
                                 <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.qtdQuartos')}? 'has-error'">
                                     <label>Número de quartos</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{imovel.qtdQuartos}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{imovel.qtdQuartos}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
                                 </div>
                                 <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.qtdVagasGaragem')}? 'has-error'">
                                     <label>Número de vagas (garagem)</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{imovel.qtdVagasGaragem}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{imovel.qtdVagasGaragem}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
                                 </div>
                             </div>
                            
