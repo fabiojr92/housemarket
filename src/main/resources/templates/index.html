@@ -53,23 +53,28 @@
 		<tbody>
 			<tr th:each="anuncio : ${anuncio}">
 				
-				<td><span th:text="${anuncio.titulo}"></span></td>
-				<td><span th:text="${anuncio.tipo}"></span></td>
-				<td><span th:text="${anuncio.imovel.tipo}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.rua}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.numero}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.bairro}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.complemento}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.cidade}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.uf}"></span></td>
-				<td><span th:text="${anuncio.imovel.areaTotalM2}"></span></td>
-				<td><span th:text="${anuncio.imovel.areaConstruidaM2}"></span></td>
-				<td><span th:text="${anuncio.imovel.qtdQuartos}"></span></td>
-				<td><span th:text="${anuncio.imovel.qtdVagasGaragem}"></span></td>
-				<td><span th:text="${anuncio.imovel.temPiscina}"></span></td>
-				<td><span th:text="${anuncio.imovel.temChurrasqueira}"></span></td>
-				<td><span th:text="${anuncio.observacoes}"></span></td>
-				<td><a class="btn btn-primary" th:href="${(#mvc.url('CAC#deletar').arg(0, anuncio.id)).build()}" role="button">Excluir</a></td>
+				<td><span th:text="*{titulo}"></span></td>
+				<td><span th:text="*{tipo}"></span></td>
+				<td><span th:text="*{imovel?.tipo}"></span></td>
+				<td><span th:text="*{imovel?.endereco?.rua}"></span></td>
+				<td><span th:text="*{imovel?.endereco?.numero}"></span></td>
+				<td><span th:text="*{imovel?.endereco?.bairro}"></span></td>
+				<td><span th:text="*{imovel?.endereco?.complemento}"></span></td>
+				<td><span th:text="*{imovel?.endereco?.cidade}"></span></td>
+				<td><span th:text="*{imovel?.endereco?.uf}"></span></td>
+				<td><span th:text="*{imovel?.areaTotalM2}"></span></td>
+				<td><span th:text="*{imovel?.areaConstruidaM2}"></span></td>
+				<td><span th:text="*{imovel?.qtdQuartos}"></span></td>
+				<td><span th:text="*{imovel?.qtdVagasGaragem}"></span></td>
+				<td><span th:text="*{imovel?.temPiscina}"></span></td>
+				<td><span th:text="*{imovel?.temChurrasqueira}"></span></td>
+				<td><span th:text="*{observacoes}"></span></td>
+
+
+				<td><div class="form-group row" th:action="@{/delete-anuncio}" method="POST">
+					<button type="submit" class="btn btn-primary">Excluir</button>
+				</div></td>
+
 		
 			</tr>	
 		</tbody>

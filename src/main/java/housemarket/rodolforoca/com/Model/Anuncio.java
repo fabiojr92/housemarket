@@ -20,11 +20,11 @@ public class Anuncio {
     @JoinColumn(name = "user_id")
     private Usuario anunciante;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "imovel_id")
     private Imovel imovel;
 
-    private String tipo;
+    private int tipo;
 
 //    public String fotos;
 
@@ -71,11 +71,11 @@ public class Anuncio {
         this.imovel = imovel;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 }

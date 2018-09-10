@@ -14,12 +14,14 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
-    private String email;
-    private String senha;
-    private int active;
+
     private String nome;
 
-//    public TipoAnunciante tipo;
+    private String email;
+
+    private String senha;
+
+    private int active;
 
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "endereco_id")
@@ -30,6 +32,8 @@ public class Usuario {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+
 
     public Usuario(String nome) {
         this.nome = nome;

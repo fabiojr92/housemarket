@@ -63,15 +63,6 @@ public class CadastroAnuncioController {
     	
     	return "redirect:/index";
    }
-    
-    @RequestMapping("/delete")
-    public String deletar(int id) {
-    	Anuncio anuncio = (Anuncio) anuncioRepository.findById(id);
-    	anuncioRepository.delete(anuncio);
-    	
-    	return "redirect:/index";
-    }
-    
 
 }
     
