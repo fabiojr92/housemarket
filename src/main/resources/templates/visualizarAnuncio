@@ -40,18 +40,18 @@
 		</div>
 
 	</div>
-	
+
 	<div class="container-fluid">
 	
 	<table class="container">
 		<thead>
 			<tr>
-				<th><h2>Anúncios</h2></th>
+				<th><h2>Detalhes do Anúncio</h2></th>
 			</tr>
 		</thead>	
 		
 		<tbody>
-			<tr th:each="anuncio : ${anuncio}">
+			<tr th:object="${anuncio}" th:object2="${imovel}" th:object3="${endereco}">
 				
 				<td><span th:text="${anuncio.titulo}"></span></td>
 				<td><span th:text="${anuncio.tipo}"></span></td>
@@ -69,6 +69,7 @@
 				<td><span th:text="${anuncio.imovel.temPiscina}"></span></td>
 				<td><span th:text="${anuncio.imovel.temChurrasqueira}"></span></td>
 				<td><span th:text="${anuncio.observacoes}"></span></td>
+				<td><a class="btn btn-primary" th:href="${(#mvc.url('CAC#deletar').arg(0, anuncio.id)).build()}" role="button">Excluir</a></td>
 		
 			</tr>	
 		</tbody>

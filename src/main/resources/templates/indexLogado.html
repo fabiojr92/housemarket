@@ -33,7 +33,7 @@
 					<a href="cadastro-anunciante" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cadastre-se</a>
 				</li>
 				<li class="nav-item">
-					<a href="login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
+					<a href="logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Logout</a>
 				</li>
 			</ul>
 
@@ -69,6 +69,7 @@
 				<td><span th:text="${anuncio.imovel.temPiscina}"></span></td>
 				<td><span th:text="${anuncio.imovel.temChurrasqueira}"></span></td>
 				<td><span th:text="${anuncio.observacoes}"></span></td>
+				<td><a class="btn btn-primary" th:href="${(#mvc.url('CAC#deletar').arg(0, anuncio.id)).build()}" role="button">Excluir</a></td>
 		
 			</tr>	
 		</tbody>
