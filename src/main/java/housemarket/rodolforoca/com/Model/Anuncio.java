@@ -25,10 +25,20 @@ public class Anuncio {
     private Imovel imovel;
 
     private int tipo;
+    
+    private double preco;
 
 //    public String fotos;
 
-    public Anuncio() {
+    public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public Anuncio() {
     }
 
     public int getId() {
