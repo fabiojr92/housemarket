@@ -76,8 +76,8 @@ public class IndexController {
 
         Usuario usuario = new Usuario("Roca");
         usuario.setEmail("rod@roc.com");
-        usuario.setSenha("1234");
-        usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+        usuario.setActive(1);
+        usuario.setSenha(bCryptPasswordEncoder.encode("1234"));
 
         Endereco endereco = new Endereco();
 
