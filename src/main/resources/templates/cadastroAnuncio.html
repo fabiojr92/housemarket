@@ -72,11 +72,11 @@
                             </div>
                             
                             <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('titulo')}? 'has-error'">
+                                <div class="col-md-3" th:classappend="${#fields.hasErrors('titulo')}? 'has-error'">
                                     <label>Titulo do Anúncio</label>
                                     <input type="text" class="form-control input-sm" th:field="*{titulo}" autofocus="autofocus" placeholder="Informe o título do anúncio" maxlength="50"/>
                                 </div>
-                                <div class="col-md-2" th:classappend="${#fields.hasErrors('preco')}? 'has-error'">
+                                <div class="col-md-1" th:classappend="${#fields.hasErrors('preco')}? 'has-error'">
                                 	<label>Preço (R$)</label>
                                     <input type="text" class="form-control input-sm" th:field="*{preco}" autofocus="autofocus" placeholder="R$ 0,00" maxlength="50"/>
                                 </div>
@@ -95,7 +95,7 @@
 										</label>
                                     </div>	
                                 </div>
-                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.tipo')}? 'has-error'">
+                                <div class="col-md-1" th:classappend="${#fields.hasErrors('imovel.tipo')}? 'has-error'">
                                     <label>Tipo do imóvel</label>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" th:field="*{imovel.tipo}"/>
@@ -116,26 +116,53 @@
 										</label>
                                     </div>
                                 </div>
+                                <div class="col-md-1" th:classappend="${#fields.hasErrors('imovel.temPiscina')}? 'has-error'">
+                                    <label>Tem piscina?</label>
+                                    <div class="form-check">
+                                    	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="true" th:field="*{imovel.temPiscina}"/>
+                                    	<label class="form-check-label" for="exampleRadios1">
+											SIM
+										</label>
+									</div>
+									<div class="form-check">
+                                    	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="false" th:field="*{imovel.temPiscina}"/>
+                                    	<label class="form-check-label" for="exampleRadios1">
+											NÃO
+										</label>
+									</div>
+                                </div>
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.temChurrasqueira')}? 'has-error'">
+                                    <label>Tem churrasqueira?</label>
+	                                <div class="form-check">
+	                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="true" th:field="*{imovel.temChurrasqueira}"/>
+	                                    <label class="form-check-label" for="exampleRadios1">
+											SIM
+										</label>
+									</div>
+									<div class="form-check">
+	                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="false" th:field="*{imovel.temChurrasqueira}"/>
+	                                    <label class="form-check-label" for="exampleRadios1">
+											NÃO
+										</label>
+									</div>
+									
+                                </div>
                             </div>
                            
                             <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.rua')}? 'has-error'">
+                                <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.endereco.rua')}? 'has-error'">
                                     <label>Endereço</label>
                                     <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.rua}" maxlength="150" placeholder="Informe o endereço"/>
                                 </div>
-                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.endereco.numero')}? 'has-error'">
+                                <div class="col-md-1" th:classappend="${#fields.hasErrors('imovel.endereco.numero')}? 'has-error'">
                                     <label>Número</label>
-                                    <input type="number" class="form-control input-sm" th:field="*{imovel.endereco.numero}" maxlength="150" placeholder="Informe o número"/>
+                                    <input type="number" class="form-control input-sm" th:field="*{imovel.endereco.numero}" maxlength="150" placeholder="Número"/>
                                 </div>
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.bairro')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.endereco.bairro')}? 'has-error'">
                                     <label>Bairro</label>
                                     <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.bairro}" maxlength="150" placeholder="Informe o bairro"/>
                                 </div>
-                            </div>
-                           
-                            <div class="form-group row">
-                                
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('imovel.endereco.complemento')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.endereco.complemento')}? 'has-error'">
                                     <label>Complemento</label>
                                     <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.complemento}" maxlength="150" placeholder="Informe o complemento"/>
                                 </div>
@@ -147,46 +174,15 @@
                                     <label>Estado (UF)</label>
                                     <input type="text" class="form-control input-sm" th:field="*{imovel.endereco.uf}" maxlength="150" placeholder="Sigla"/>
                                 </div>
-                                <div class="col-md-1" th:classappend="${#fields.hasErrors('imovel.temPiscina')}? 'has-error'">
-                                    <label>Tem piscina?</label>
-                                    <div class="form-check">
-                                    	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" th:field="*{imovel.temPiscina}"/>
-                                    	<label class="form-check-label" for="exampleRadios1">
-											SIM
-										</label>
-									</div>
-									<div class="form-check">
-                                    	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="2" th:field="*{imovel.temPiscina}"/>
-                                    	<label class="form-check-label" for="exampleRadios1">
-											NÃO
-										</label>
-									</div>
-                                </div>
-                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.temChurrasqueira')}? 'has-error'">
-                                    <label>Tem churrasqueira?</label>
-	                                <div class="form-check">
-	                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" th:field="*{imovel.temChurrasqueira}"/>
-	                                    <label class="form-check-label" for="exampleRadios1">
-											SIM
-										</label>
-									</div>
-									<div class="form-check">
-	                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" th:field="*{imovel.temChurrasqueira}"/>
-	                                    <label class="form-check-label" for="exampleRadios1">
-											NÃO
-										</label>
-									</div>
-									
-                                </div>
                             </div>
   
                             <div class="form-group row">
                                 
-                                <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.areaTotalM2')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.areaTotalM2')}? 'has-error'">
                                     <label>Área total (M²)</label>
                                     <input type="number" class="form-control input-sm" th:field="*{imovel.areaTotalM2}" autofocus="autofocus" placeholder="Informe o tamanho em M²" maxlength="50"/>
                                 </div>
-                                <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.areaConstruidaM2')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.areaConstruidaM2')}? 'has-error'">
                                     <label>Área construída (M²)</label>
                                     <input type="number" class="form-control input-sm" th:field="*{imovel.areaConstruidaM2}" autofocus="autofocus" placeholder="Informe o tamanho em M²" maxlength="50"/>
                                 </div>
@@ -194,7 +190,7 @@
                                     <label>Número de quartos</label>
                                     <input type="number" class="form-control input-sm" th:field="*{imovel.qtdQuartos}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
                                 </div>
-                                <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.qtdVagasGaragem')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.qtdVagasGaragem')}? 'has-error'">
                                     <label>Número de vagas (garagem)</label>
                                     <input type="number" class="form-control input-sm" th:field="*{imovel.qtdVagasGaragem}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
                                 </div>
