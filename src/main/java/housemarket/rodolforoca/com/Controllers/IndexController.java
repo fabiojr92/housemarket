@@ -1,25 +1,28 @@
 package housemarket.rodolforoca.com.Controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
-import housemarket.rodolforoca.com.DAO.*;
-import housemarket.rodolforoca.com.Model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.Arrays;
 import java.util.HashSet;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import housemarket.rodolforoca.com.DAO.AnuncioRepository;
+import housemarket.rodolforoca.com.DAO.EnderecoRepository;
+import housemarket.rodolforoca.com.DAO.ImovelRepository;
+import housemarket.rodolforoca.com.DAO.RoleRepository;
+import housemarket.rodolforoca.com.DAO.UsuarioRepository;
+import housemarket.rodolforoca.com.Model.Anuncio;
+import housemarket.rodolforoca.com.Model.Endereco;
+import housemarket.rodolforoca.com.Model.Imovel;
+import housemarket.rodolforoca.com.Model.Role;
+import housemarket.rodolforoca.com.Model.Usuario;
 
 @Controller
 public class IndexController {
@@ -38,6 +41,7 @@ public class IndexController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
     @Autowired
     private AnuncioRepository anuncioRepository;
 
@@ -81,9 +85,10 @@ public class IndexController {
 
         Endereco endereco = new Endereco();
 
-        endereco.setRua("Minha Rua");
-        endereco.setNumero(123);
-        endereco.setBairro("Centro");
+        endereco.setRua("Rua Edward Quirino Lacerda");
+        endereco.setNumero(216);
+        endereco.setBairro("Residencial Ana Maria do Couto");
+        endereco.setComplemento("nenhum");
         endereco.setCidade("Campo Grande");
         endereco.setUf("MS");
 
@@ -109,7 +114,9 @@ public class IndexController {
         anuncio.setImovel(imovel);
         anuncio.setAnunciante(usuario);
         anuncio.setTipo(1);
-        anuncio.setTitulo("Imóvel novo - ótimo preçø");
+        anuncio.setTitulo("Casa Térrea - ótimo preço");
+        anuncio.setPreco(180.000);
+        anuncio.setObservacoes("Excelente casa com amplo espaço");
 
         anuncioRepository.save(anuncio);
 
@@ -127,7 +134,7 @@ public class IndexController {
 
 
     @RequestMapping("/delete-anuncio")
-    public String deletar(int id) {
+    public String deletarAnuncio(int id) {
         Anuncio anuncio = (Anuncio) anuncioRepository.findById(id);
         anuncioRepository.delete(anuncio);
         imovelRepository.delete(anuncio.getImovel());
@@ -135,4 +142,13 @@ public class IndexController {
 
         return "redirect:/index";
     }
+    
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    public ModelAndView detalhesAnuncio(@PathVariable("id") long id) {
+    	Anuncio anuncio = anuncioRepository.findById(id);
+    	ModelAndView mv = new ModelAndView("visualizarAnuncio");
+    	mv.addObject("anuncio", anuncio);
+    	return mv;
+    }
+    
 }

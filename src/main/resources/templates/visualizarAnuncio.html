@@ -43,39 +43,46 @@
 
 	<div class="container-fluid">
 	
-	<table class="container">
-		<thead>
-			<tr>
-				<th><h2>Detalhes do Anúncio</h2></th>
-			</tr>
-		</thead>	
-		
-		<tbody>
-			<tr th:object="${anuncio}" th:object2="${imovel}" th:object3="${endereco}">
-				
-				<td><span th:text="${anuncio.titulo}"></span></td>
-				<td><span th:text="${anuncio.tipo}"></span></td>
-				<td><span th:text="${anuncio.imovel.tipo}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.rua}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.numero}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.bairro}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.complemento}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.cidade}"></span></td>
-				<td><span th:text="${anuncio.imovel.endereco.uf}"></span></td>
-				<td><span th:text="${anuncio.imovel.areaTotalM2}"></span></td>
-				<td><span th:text="${anuncio.imovel.areaConstruidaM2}"></span></td>
-				<td><span th:text="${anuncio.imovel.qtdQuartos}"></span></td>
-				<td><span th:text="${anuncio.imovel.qtdVagasGaragem}"></span></td>
-				<td><span th:text="${anuncio.imovel.temPiscina}"></span></td>
-				<td><span th:text="${anuncio.imovel.temChurrasqueira}"></span></td>
-				<td><span th:text="${anuncio.observacoes}"></span></td>
-				<td><a class="btn btn-primary" th:href="${(#mvc.url('CAC#deletar').arg(0, anuncio.id)).build()}" role="button">Excluir</a></td>
-		
-			</tr>	
-		</tbody>
-		
+		<table class="container">
+			<thead>
+				<tr>
+					<th><h2>Detalhes do Anúncio</h2></th>
+				</tr>
+			</thead>	
+			
+			<tbody>
+				<tr th:each="anuncio : ${anuncio}">
+					
+					<td th:text="${anuncio.titulo}"></td>
+					<td th:text="${anuncio.tipo}"></td>
+					<td th:text="${anuncio.preco}"></td>
+					<td th:text="${anuncio.imovel.tipo}"></td>
+					<td th:text="${anuncio.imovel.endereco.rua}"></td>
+					<td th:text="${anuncio.imovel.endereco.numero}"></td>
+					<td th:text="${anuncio.imovel.endereco.bairro}"></td>
+					<td th:text="${anuncio.imovel.endereco.complemento}"></td>
+					<td th:text="${anuncio.imovel.endereco.cidade}"></td>
+					<td th:text="${anuncio.imovel.endereco.uf}"></td>
+					<td th:text="${anuncio.imovel.areaTotalM2}"></td>
+					<td th:text="${anuncio.imovel.areaConstruidaM2}"></td>
+					<td th:text="${anuncio.imovel.qtdQuartos}"></td>
+					<td th:text="${anuncio.imovel.qtdVagasGaragem}"></td>
+					<td th:text="${anuncio.imovel.temPiscina}"></td>
+					<td th:text="${anuncio.imovel.temChurrasqueira}"></td>
+					<td th:text="${anuncio.observacoes}"></td>
+					
+					<td>
+						<div class="btn-group pull-right">
+					   		<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}" >Editar</a>
+					   		<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
+					   </div>
+					</td>
+			
+				</tr>	
+			</tbody>
+			
 		</table>
-		</div>
+	</div>
 
 	<div class="p-3 mb-2 bg-info text-white">
 		<div class="container-fluid">

@@ -43,44 +43,32 @@
 	
 	<div class="container-fluid">
 	
-	<table class="container">
-		<thead>
-			<tr>
-				<th><h2>Anúncios</h2></th>
-			</tr>
-		</thead>	
-		
-		<tbody>
-			<tr th:each="anuncio : ${anuncio}">
-				
-				<td><span th:text="*{titulo}"></span></td>
-				<td><span th:text="*{tipo}"></span></td>
-				<td><span th:text="*{imovel?.tipo}"></span></td>
-				<td><span th:text="*{imovel?.endereco?.rua}"></span></td>
-				<td><span th:text="*{imovel?.endereco?.numero}"></span></td>
-				<td><span th:text="*{imovel?.endereco?.bairro}"></span></td>
-				<td><span th:text="*{imovel?.endereco?.complemento}"></span></td>
-				<td><span th:text="*{imovel?.endereco?.cidade}"></span></td>
-				<td><span th:text="*{imovel?.endereco?.uf}"></span></td>
-				<td><span th:text="*{imovel?.areaTotalM2}"></span></td>
-				<td><span th:text="*{imovel?.areaConstruidaM2}"></span></td>
-				<td><span th:text="*{imovel?.qtdQuartos}"></span></td>
-				<td><span th:text="*{imovel?.qtdVagasGaragem}"></span></td>
-				<td><span th:text="*{imovel?.temPiscina}"></span></td>
-				<td><span th:text="*{imovel?.temChurrasqueira}"></span></td>
-				<td><span th:text="*{observacoes}"></span></td>
-
-
-				<td><div class="form-group row" th:action="@{/delete-anuncio}" method="POST">
-					<button type="submit" class="btn btn-primary">Excluir</button>
-				</div></td>
-
-		
-			</tr>	
-		</tbody>
-		
+		<table class="container">
+			<thead>
+				<tr>
+					<th><h2>Anúncios</h2></th>
+				</tr>
+			</thead>	
+			
+			<tbody>
+				<tr th:each="anuncio : ${anuncio}">
+					
+					<td th:text="${anuncio.titulo}"></td>
+					<td th:text="${anuncio.preco}"></td>
+					<td th:text="${anuncio.tipo}"></td>
+					
+					<td>
+						<div class="btn-group pull-right">
+					   		<a class="btn btn-outline-secondary" th:href="@{/detalhesAnuncio/{id}(id=${anuncio.id})}">Detalhes</a>
+					   		<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}">Editar</a>
+					   		<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
+					   </div>
+					</td>
+				</tr>	
+			</tbody>
+			
 		</table>
-		</div>
+	</div>
 
 	<div class="p-3 mb-2 bg-info text-white">
 		<div class="container-fluid">

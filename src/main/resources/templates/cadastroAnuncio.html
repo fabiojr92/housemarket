@@ -80,54 +80,54 @@
                                 	<label>Preço (R$)</label>
                                     <input type="text" class="form-control input-sm" th:field="*{preco}" autofocus="autofocus" placeholder="R$ 0,00" maxlength="50"/>
                                 </div>
-                                <div class="col-md-1" th:classappend="${#fields.hasErrors('tipo')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('tipo')}? 'has-error'">
                                     <label>Tipo do anúncio</label>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" th:field="*{tipo}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											VENDA
+											Venda
 										</label>
                                     </div>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="2" th:field="*{tipo}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											ALUGUEL
+											Aluguel
 										</label>
                                     </div>	
                                 </div>
-                                <div class="col-md-1" th:classappend="${#fields.hasErrors('imovel.tipo')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.tipo')}? 'has-error'">
                                     <label>Tipo do imóvel</label>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" th:field="*{imovel.tipo}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											CASA
+											Casa
 										</label>
                                     </div>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="2" th:field="*{imovel.tipo}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											APARTAMENTO
+											Apartamento
 										</label>
                                     </div>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="3" th:field="*{imovel.tipo}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											RURAL
+											Rural
 										</label>
                                     </div>
                                 </div>
-                                <div class="col-md-1" th:classappend="${#fields.hasErrors('imovel.temPiscina')}? 'has-error'">
+                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.temPiscina')}? 'has-error'">
                                     <label>Tem piscina?</label>
                                     <div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="true" th:field="*{imovel.temPiscina}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											SIM
+											Sim
 										</label>
 									</div>
 									<div class="form-check">
                                     	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="false" th:field="*{imovel.temPiscina}"/>
                                     	<label class="form-check-label" for="exampleRadios1">
-											NÃO
+											Não
 										</label>
 									</div>
                                 </div>
@@ -136,13 +136,13 @@
 	                                <div class="form-check">
 	                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="true" th:field="*{imovel.temChurrasqueira}"/>
 	                                    <label class="form-check-label" for="exampleRadios1">
-											SIM
+											Sim
 										</label>
 									</div>
 									<div class="form-check">
 	                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="false" th:field="*{imovel.temChurrasqueira}"/>
 	                                    <label class="form-check-label" for="exampleRadios1">
-											NÃO
+											Não
 										</label>
 									</div>
 									
@@ -190,7 +190,7 @@
                                     <label>Número de quartos</label>
                                     <input type="number" class="form-control input-sm" th:field="*{imovel.qtdQuartos}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
                                 </div>
-                                <div class="col-md-2" th:classappend="${#fields.hasErrors('imovel.qtdVagasGaragem')}? 'has-error'">
+                                <div class="col-md-3" th:classappend="${#fields.hasErrors('imovel.qtdVagasGaragem')}? 'has-error'">
                                     <label>Número de vagas (garagem)</label>
                                     <input type="number" class="form-control input-sm" th:field="*{imovel.qtdVagasGaragem}" autofocus="autofocus" placeholder="Informe a quantidade" maxlength="50"/>
                                 </div>
