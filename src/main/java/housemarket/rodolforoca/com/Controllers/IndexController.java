@@ -1,7 +1,9 @@
 package housemarket.rodolforoca.com.Controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -135,7 +137,7 @@ public class IndexController {
 
     @RequestMapping("/delete-anuncio")
     public String deletarAnuncio(int id) {
-        Anuncio anuncio = (Anuncio) anuncioRepository.findById(id);
+        Anuncio anuncio = anuncioRepository.findById(id);
         anuncioRepository.delete(anuncio);
         imovelRepository.delete(anuncio.getImovel());
         enderecoRepository.delete(anuncio.getImovel().getEndereco());
@@ -143,9 +145,9 @@ public class IndexController {
         return "redirect:/index";
     }
     
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ModelAndView detalhesAnuncio(@PathVariable("id") long id) {
-    	Anuncio anuncio = anuncioRepository.findById(id);
+    @RequestMapping(value="/detalhesAnuncio/{id}", method=RequestMethod.GET)
+    public ModelAndView detalhesAnuncio(@PathVariable("id") int id) {
+        Anuncio anuncio = anuncioRepository.findById(id);
     	ModelAndView mv = new ModelAndView("visualizarAnuncio");
     	mv.addObject("anuncio", anuncio);
     	return mv;
