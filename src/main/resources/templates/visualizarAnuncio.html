@@ -42,46 +42,92 @@
 	</div>
 
 	<div class="container-fluid">
-	
-		<table class="container">
-			<thead>
-				<tr>
-					<th><h2>Detalhes do Anúncio</h2></th>
-				</tr>
-			</thead>	
-			
-			<tbody>
-				<tr th:each="anuncio : ${anuncio}">
-					
-					<td th:text="${anuncio.titulo}"></td>
-					<td th:text="${anuncio.tipo}"></td>
-					<td th:text="${anuncio.preco}"></td>
-					<td th:text="${anuncio.imovel.tipo}"></td>
-					<td th:text="${anuncio.imovel.endereco.rua}"></td>
-					<td th:text="${anuncio.imovel.endereco.numero}"></td>
-					<td th:text="${anuncio.imovel.endereco.bairro}"></td>
-					<td th:text="${anuncio.imovel.endereco.complemento}"></td>
-					<td th:text="${anuncio.imovel.endereco.cidade}"></td>
-					<td th:text="${anuncio.imovel.endereco.uf}"></td>
-					<td th:text="${anuncio.imovel.areaTotalM2}"></td>
-					<td th:text="${anuncio.imovel.areaConstruidaM2}"></td>
-					<td th:text="${anuncio.imovel.qtdQuartos}"></td>
-					<td th:text="${anuncio.imovel.qtdVagasGaragem}"></td>
-					<td th:text="${anuncio.imovel.temPiscina}"></td>
-					<td th:text="${anuncio.imovel.temChurrasqueira}"></td>
-					<td th:text="${anuncio.observacoes}"></td>
-					
-					<td>
-						<div class="btn-group pull-right">
-					   		<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}" >Editar</a>
-					   		<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
-					   </div>
-					</td>
-			
-				</tr>	
-			</tbody>
-			
-		</table>
+		<div class="table-responsive">
+			<table class="table table-sm">
+				<thead>
+					<th><h3>Detalhes do anúncio</h3></th>
+				</thead>	
+				
+				<tbody>
+					<tr th:each="anuncio : ${anuncio}">
+						
+						<tr>
+							<th scope="col">Título</th>
+							<th scope="col">Tipo do imóvel</th>
+							<th scope="col">Preço</th>
+							<th scope="col">Tipo do anúncio</th>
+							
+							<tr>	
+								<td th:text="${anuncio.titulo}"></td>
+								<td th:text="${anuncio.tipo}"></td>
+								<td th:text="${anuncio.preco}"></td>
+								<td th:text="${anuncio.imovel.tipo}"></td>
+							</tr>
+						</tr>	
+						
+						<tr>
+							<th scope="col">Endereço</th>
+							<th scope="col">Número</th>
+							<th scope="col">Bairro</th>
+							<th scope="col">Complemento</th>
+							
+							<tr>
+								<td th:text="${anuncio.imovel.endereco.rua}"></td>
+								<td th:text="${anuncio.imovel.endereco.numero}"></td>
+								<td th:text="${anuncio.imovel.endereco.bairro}"></td>
+								<td th:text="${anuncio.imovel.endereco.complemento}"></td>
+							</tr>
+						</tr>
+						
+						<tr>
+							<th scope="col">Cidade</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Área Total(M²)</th>
+							<th scope="col">Área construída(M²)</th>
+							
+							<tr>	
+								<td th:text="${anuncio.imovel.endereco.cidade}"></td>
+								<td th:text="${anuncio.imovel.endereco.uf}"></td>
+								<td th:text="${anuncio.imovel.areaTotalM2}"></td>
+								<td th:text="${anuncio.imovel.areaConstruidaM2}"></td>
+							</tr>
+						</tr>
+						
+						<tr>	
+							<th scope="col">Quartos</th>
+							<th scope="col">Vagas (garagem)</th>
+							<th scope="col">Piscina</th>
+							<th scope="col">Churrasqueira</th>
+							
+							<tr>	
+								<td th:text="${anuncio.imovel.qtdQuartos}"></td>
+								<td th:text="${anuncio.imovel.qtdVagasGaragem}"></td>
+								<td th:text="${anuncio.imovel.temPiscina}"></td>
+								<td th:text="${anuncio.imovel.temChurrasqueira}"></td>
+							</tr>
+						</tr>
+						
+						<tr>
+							<th scope="col">Observações</th>
+							
+							<tr>
+								<td th:text="${anuncio.observacoes}"></td>
+							</tr>
+						</tr>	
+						
+						<td>
+							<div class="btn-group pull-right">
+						   		<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}" >Editar</a>
+						   		<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
+						   </div>
+						</td>
+				
+					</tr>	
+				</tbody>
+				
+			</table>
+		</div>	
+		
 	</div>
 
 	<div class="p-3 mb-2 bg-info text-white">
