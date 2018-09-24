@@ -16,7 +16,7 @@
 
 <body>
 
-	<div class="p-3 mb-2 bg-info text-white">
+	<div class="p-3 mb-2 bg-primary text-white">
 		
 		<div class="container-fluid">
 			
@@ -41,12 +41,50 @@
 
 	</div>
 	
-	<div class="container-fluid">
+	<div class="container">
+		
+		<h1>Bem-vindo</h1>
+		<h6>Temos o anúncio ideal para você!</h6>
+		
+		<hr>
+		
+			<form class="form-inline" method="POST">	
+				<div class="form-group">
+					<fieldset>
+						<div class="form-group row">
+							<div class="col">
+								<h2>Encontre seu imóvel</h2>
+								<p>Digite a rua, bairro ou a cidade</p>
+							</div>
+						</div>
+					
+						<div class="form-group row">
+							<div class="col">
+								<input type="search" class="form-control input-sm"/>
+							</div>
+							<div class="col">
+								<select class="custom-select">
+								  	<option selected>Selecione</option>
+								  	<option value="1">Rua</option>
+								  	<option value="2">Bairro</option>
+								  	<option value="3">Cidade</option>
+								</select>
+							</div>
+							<div class="col">
+								<button type="submit" class="btn btn-primary">Buscar</button>
+							</div>
+						</div>
+					
+					</fieldset>
+				</div>
+			</form>
+	
+		<hr>	
 	
 		<table class="container">
 			<thead>
 				<tr>
-					<th><h2>Anúncios</h2></th>
+					<th><h2>Últimos anúncios</h2></th>
 				</tr>
 			</thead>	
 			
@@ -58,7 +96,7 @@
 					<td th:text="${anuncio.tipo}"></td>
 					
 					<td>
-						<div class="btn-group pull-right">
+						<div class="btn-group btn-group-sm pull-right">
 					   		<a class="btn btn-outline-secondary" th:href="@{/detalhesAnuncio/{id}(id=${anuncio.id})}">Detalhes</a>
 					   		<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}">Editar</a>
 					   		<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
@@ -68,9 +106,24 @@
 			</tbody>
 			
 		</table>
+		
+		<nav aria-label="Navegação de página exemplo">
+		  	<ul class="pagination justify-content-center">
+		    	<li class="page-item disabled">
+		      		<a class="page-link" href="#" tabindex="-1">Anterior</a>
+		    	</li>
+		    	<li class="page-item"><a class="page-link" href="#">1</a></li>
+		    	<li class="page-item"><a class="page-link" href="#">2</a></li>
+		    	<li class="page-item"><a class="page-link" href="#">3</a></li>
+		    	<li class="page-item">
+		      		<a class="page-link" href="#">Próximo</a>
+		    	</li>
+		  </ul>
+		</nav>
+		
 	</div>
 
-	<div class="p-3 mb-2 bg-info text-white">
+	<div class="p-3 mb-2 bg-primary text-white">
 		<div class="container-fluid">
 			<h5>House Market- Anuncie seu imóvel aqui</h5>
 			<p>&copy; 2018 Copyright - Todos os direitos reservados</p>
