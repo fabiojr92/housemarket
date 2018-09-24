@@ -24,5 +24,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registrationBean.addUrlMappings("/console/*");
         return registrationBean;
     }
+
+
 }
 
