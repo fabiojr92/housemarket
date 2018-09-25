@@ -89,7 +89,7 @@
 			</thead>	
 			
 			<tbody>
-				<tr th:each="anuncio : ${anuncio}">
+				<tr th:each="anuncio : ${page.content}">
 					
 					<td th:text="${anuncio.titulo}"></td>
 					<td th:text="${anuncio.preco}"></td>
@@ -106,20 +106,35 @@
 			</tbody>
 			
 		</table>
-		
-		<nav aria-label="Navegação de página exemplo">
-		  	<ul class="pagination justify-content-center">
-		    	<li class="page-item disabled">
-		      		<a class="page-link" href="#" tabindex="-1">Anterior</a>
-		    	</li>
-		    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-		    	<li class="page-item"><a class="page-link" href="#">2</a></li>
-		    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-		    	<li class="page-item">
-		      		<a class="page-link" href="#">Próximo</a>
-		    	</li>
-		  </ul>
-		</nav>
+
+		<div class="pagination-div">
+    		<span th:if="${page.hasPrevious()}">
+        		<a th:href="@{/index(page=${page.number-1},size=${page.size})}">Previous</a>
+    		</span>
+			<th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+				<span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+				<span th:unless="${page.number == i}">
+             		<a th:href="@{/index(page=${i},size=${page.size})}">[[${i}+1]]</a>
+				</span>
+			</th:block>
+			<span th:if="${page.hasNext()}">
+        		<a th:href="@{/index(page=${page.number+1},size=${page.size})}">Next</a>
+    		</span>
+		</div>
+
+		<!--<nav aria-label="Navegação de página exemplo">-->
+		  	<!--<ul class="pagination justify-content-center">-->
+		    	<!--<li class="page-item disabled">-->
+		      		<!--<a class="page-link" href="#" tabindex="-1">Anterior</a>-->
+		    	<!--</li>-->
+		    	<!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+		    	<!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+		    	<!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+		    	<!--<li class="page-item">-->
+		      		<!--<a class="page-link" href="#">Próximo</a>-->
+		    	<!--</li>-->
+		  <!--</ul>-->
+		<!--</nav>-->
 		
 	</div>
 

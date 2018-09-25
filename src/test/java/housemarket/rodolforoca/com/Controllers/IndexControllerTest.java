@@ -10,11 +10,11 @@ public class IndexControllerTest {
     @Autowired
     IndexController indexController;
 
-    @Test
-    public void listaAnuncios() {
-        assertNotNull(indexController);
-        assertNotNull(indexController.listaAnuncios());
-    }
+//    @Test
+//    public void listaAnuncios() {
+//        assertNotNull(indexController);
+//        assertNotNull(indexController.listaAnuncios());
+//    }
 
     @Test
     public void detalhesAnuncio() {

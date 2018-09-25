@@ -8,11 +8,17 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import housemarket.rodolforoca.com.DAO.AnuncioRepository;
@@ -50,28 +56,16 @@ public class IndexController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-//    @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
-//    public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="Wooorld!!!") String name) {
-//        model.addAttribute("name", name);
-//
-////        usuarioRepository.save(new Usuario("Roca3"));
-////
-////        for (Usuario u: usuarioRepository.findAll()) {
-////            System.out.println(u.getId());
-////        }
-//        return "index";
-//    }
-
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
-    public ModelAndView listaAnuncios() {
-        addSampleData();
+    public String listaAnuncios(@PageableDefault(size = 10) Pageable pageable,
+                               Model model) {
+        if (pageable.getPageNumber() == 0) {
+            addSampleData();
+        }
 
-        ModelAndView mv = new ModelAndView("index");
-        Iterable<Anuncio> anuncio = anuncioRepository.findAll();
-
-        mv.addObject("anuncio", anuncio);
-
-        return mv;
+        Page<Anuncio> page = anuncioRepository.findAll(pageable);
+        model.addAttribute("page", page);
+        return "index";
     }
 
     private void addSampleData() {
@@ -100,6 +94,12 @@ public class IndexController {
         usuario.setRoles(new HashSet<Role>(Arrays.asList(role)));
         usuarioRepository.save(usuario);
 
+        for (int i = 1; i <= 10; i++) {
+            addImovelSample(i, usuario, endereco);
+        }
+    }
+
+    private void addImovelSample(int i, Usuario usuario, Endereco endereco) {
         Imovel imovel = new Imovel();
         imovel.setEndereco(endereco);
         imovel.setAreaTotalM2(300);
@@ -116,12 +116,11 @@ public class IndexController {
         anuncio.setImovel(imovel);
         anuncio.setAnunciante(usuario);
         anuncio.setTipo(1);
-        anuncio.setTitulo("Casa Térrea - ótimo preço");
+        anuncio.setTitulo("Casa Térrea - ótimo preço " + i);
         anuncio.setPreco(180.000);
         anuncio.setObservacoes("Excelente casa com amplo espaço");
 
         anuncioRepository.save(anuncio);
-
     }
 
     //    @RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -152,5 +151,4 @@ public class IndexController {
     	mv.addObject("anuncio", anuncio);
     	return mv;
     }
-    
 }

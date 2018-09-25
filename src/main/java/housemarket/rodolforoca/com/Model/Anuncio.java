@@ -28,15 +28,6 @@ public class Anuncio {
     
     private double preco;
 
-//    public String fotos;
-
-    public double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(double preco) {
-		this.preco = preco;
-	}
 
 	public Anuncio() {
     }
@@ -87,5 +78,13 @@ public class Anuncio {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 }
