@@ -48,7 +48,7 @@
 		
 		<hr>
 		
-			<form class="form-inline" method="POST">	
+			<form class="form-inline" th:action="@{/pesquisar}" method="GET">	
 				<div class="form-group">
 					<fieldset>
 						<div class="form-group row">
@@ -58,22 +58,11 @@
 							</div>
 						</div>
 					
-						<div class="form-group row">
-							<div class="col">
-								<input type="search" class="form-control input-sm"/>
-							</div>
-							<div class="col">
-								<select class="custom-select">
-								  	<option selected>Selecione</option>
-								  	<option value="1">Rua</option>
-								  	<option value="2">Bairro</option>
-								  	<option value="3">Cidade</option>
-								</select>
-							</div>
-							<div class="col">
-								<button type="submit" class="btn btn-primary">Buscar</button>
-							</div>
-						</div>
+			                <input type="" name="search" class="form-control input-sm"
+			                       placeholder="Pesquise seu anúncio" required/>
+			
+			                <button type="submit" class="btn btn-primary">Buscar</button>
+			            
 					
 					</fieldset>
 				</div>
@@ -107,9 +96,9 @@
 			
 		</table>
 
-		<div class="pagination-div">
+		<div class="pagination justify-content-center">
     		<span th:if="${page.hasPrevious()}">
-        		<a th:href="@{/index(page=${page.number-1},size=${page.size})}">Previous</a>
+        		<a th:href="@{/index(page=${page.number-1},size=${page.size})}">Anterior</a>
     		</span>
 			<th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
 				<span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
@@ -118,7 +107,7 @@
 				</span>
 			</th:block>
 			<span th:if="${page.hasNext()}">
-        		<a th:href="@{/index(page=${page.number+1},size=${page.size})}">Next</a>
+        		<a th:href="@{/index(page=${page.number+1},size=${page.size})}">Próximo</a>
     		</span>
 		</div>
 
