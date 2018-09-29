@@ -10,10 +10,8 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,18 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import housemarket.rodolforoca.com.DAO.AnuncioRepository;
-import housemarket.rodolforoca.com.DAO.EnderecoRepository;
-import housemarket.rodolforoca.com.DAO.ImovelRepository;
 import housemarket.rodolforoca.com.DAO.RoleRepository;
-import housemarket.rodolforoca.com.DAO.UsuarioRepository;
 import housemarket.rodolforoca.com.Model.Anuncio;
-import housemarket.rodolforoca.com.Model.Endereco;
-import housemarket.rodolforoca.com.Model.Imovel;
-import housemarket.rodolforoca.com.Model.Role;
-import housemarket.rodolforoca.com.Model.Usuario;
-import housemarket.rodolforoca.com.Service.AnuncioService;
+
 
 @Controller
 public class IndexController {
@@ -44,29 +34,22 @@ public class IndexController {
     RoleRepository roleRepository;
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
-
-    @Autowired
-    private ImovelRepository imovelRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
     private AnuncioRepository anuncioRepository;
     
-    @Autowired
-    private AnuncioService anuncioService;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private AnuncioService anuncioService;
 
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
-    public String listaAnuncios(@PageableDefault(size = 10) Pageable pageable,
+    public ModelAndView listaAnuncios(@PageableDefault(size = 10) Pageable pageable,
                                Model model) {
+
         Page<Anuncio> page = anuncioRepository.findAll(pageable);
         model.addAttribute("page", page);
-        return "index";
+
+        ModelAndView mv = new ModelAndView("index");
+        mv.addObject(page);
+
+        return mv;
     }
 
 
@@ -94,21 +77,24 @@ public class IndexController {
     
     @RequestMapping(value="/detalhesAnuncio/{id}", method=RequestMethod.GET)
     public ModelAndView detalhesAnuncio(@PathVariable("id") int id) {
-        Optional<Anuncio> anuncio = anuncioRepository.findById(id);
+        Anuncio anuncio = anuncioRepository.findById(id);
     	ModelAndView mv = new ModelAndView("visualizarAnuncio");
     	mv.addObject("anuncio", anuncio);
     	return mv;
     }
     
     @RequestMapping(value = {"/pesquisar"}, method = RequestMethod.GET)
-    public ModelAndView pesquisar(@RequestParam("search") String search) {
-        ModelAndView mv = new ModelAndView();
-        List<Anuncio> anuncio = anuncioService.buscarAnunciosPorPesquisa(search);
-        mv.addObject("anuncio", anuncio);
-        mv.setViewName("index");
+    public ModelAndView pesquisar(@RequestParam("search") String search, @PageableDefault(size = 10) Pageable pageable,
+                                  Model model) {
+        ModelAndView mv = new ModelAndView("index");
+
+        Page<Anuncio> page = anuncioRepository.findAnunciosBySearch(search, pageable);
+        model.addAttribute("page", page);
+
+        mv.addObject(page);
 
         return mv;
     }
-    
-    
+
+
 }

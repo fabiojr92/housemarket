@@ -3,6 +3,8 @@ package housemarket.rodolforoca.com;
 import housemarket.rodolforoca.com.DAO.*;
 import housemarket.rodolforoca.com.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -18,13 +20,13 @@ import java.util.HashSet;
 
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer {
+public class Application extends SpringBootServletInitializer implements ApplicationRunner {
 
 	@Autowired
 	DataSource dataSource;
 
 	@Autowired
-	RoleRepository roleRepository;
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
@@ -43,7 +45,6 @@ public class Application extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		addSampleData();
 
 		return application.sources(Application.class);
 	}
@@ -59,6 +60,11 @@ public class Application extends SpringBootServletInitializer {
 		return registration;
 	}
 
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		addSampleData();
+	}
+
 	private void addSampleData() {
 		Role role = new Role();
 		role.setRole("ADMIN");
@@ -72,9 +78,9 @@ public class Application extends SpringBootServletInitializer {
 
 		Endereco endereco = new Endereco();
 
-		endereco.setRua("Rua Edward Quirino Lacerda");
-		endereco.setNumero(216);
-		endereco.setBairro("Residencial Ana Maria do Couto");
+		endereco.setRua("Av Afonso Pena");
+		endereco.setNumero(2160);
+		endereco.setBairro("Centro");
 		endereco.setComplemento("nenhum");
 		endereco.setCidade("Campo Grande");
 		endereco.setUf("MS");
@@ -85,12 +91,13 @@ public class Application extends SpringBootServletInitializer {
 		usuario.setRoles(new HashSet<Role>(Arrays.asList(role)));
 		usuarioRepository.save(usuario);
 
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 30; i++) {
 			addImovelSample(i, usuario, endereco);
 		}
 	}
 
 	private void addImovelSample(int i, Usuario usuario, Endereco endereco) {
+
 		Imovel imovel = new Imovel();
 		imovel.setEndereco(endereco);
 		imovel.setAreaTotalM2(300);
@@ -103,6 +110,29 @@ public class Application extends SpringBootServletInitializer {
 
 		imovelRepository.save(imovel);
 
+		Endereco novoEndereco = new Endereco();
+
+		novoEndereco.setRua("Av Mato Grosso");
+		novoEndereco.setNumero(3160);
+		novoEndereco.setBairro("Parque dos Poderes");
+		novoEndereco.setComplemento("nenhum");
+		novoEndereco.setCidade("Dourados");
+		novoEndereco.setUf("MS");
+
+		enderecoRepository.save(novoEndereco);
+
+		Imovel novoImovel = new Imovel();
+		novoImovel.setEndereco(novoEndereco);
+		novoImovel.setAreaTotalM2(300);
+		novoImovel.setAreaConstruidaM2(200);
+		novoImovel.setQtdQuartos(2);
+		novoImovel.setQtdVagasGaragem(2);
+		novoImovel.setTemChurrasqueira(false);
+		novoImovel.setTemPiscina(false);
+		novoImovel.setTipo(1);
+
+		imovelRepository.save(novoImovel);
+
 		Anuncio anuncio = new Anuncio();
 		anuncio.setImovel(imovel);
 		anuncio.setAnunciante(usuario);
@@ -111,6 +141,20 @@ public class Application extends SpringBootServletInitializer {
 		anuncio.setPreco(180.000);
 		anuncio.setObservacoes("Excelente casa com amplo espaço");
 
-		anuncioRepository.save(anuncio);
+
+		Anuncio novoAnuncio = new Anuncio();
+		novoAnuncio.setImovel(novoImovel);
+		novoAnuncio.setAnunciante(usuario);
+		novoAnuncio.setTipo(1);
+		novoAnuncio.setTitulo("Apartamento caro " + i);
+		novoAnuncio.setPreco(180.000);
+		novoAnuncio.setObservacoes("Excelente ap com amplo espaço");
+
+		if (i == 0 || i % 2 == 0) {
+			anuncioRepository.save(anuncio);
+		} else {
+			anuncioRepository.save(novoAnuncio);
+		}
+
 	}
 }
