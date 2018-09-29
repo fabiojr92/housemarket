@@ -1,25 +1,30 @@
 package housemarket.rodolforoca.com.DAO;
 
+
 import housemarket.rodolforoca.com.ApplicationTests;
+import housemarket.rodolforoca.com.Config.WebMvcConfig;
 import housemarket.rodolforoca.com.Model.Role;
 import housemarket.rodolforoca.com.Model.Usuario;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
-
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
 
 public class UsuarioRepositoryTest extends ApplicationTests {
 
-    @Autowired
-    DataSource dataSource;
+
 
     @Autowired
     RoleRepository roleRepository;

@@ -49,7 +49,7 @@ public class IndexController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
+
     @Autowired
     private AnuncioRepository anuncioRepository;
 
@@ -59,69 +59,12 @@ public class IndexController {
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
     public String listaAnuncios(@PageableDefault(size = 10) Pageable pageable,
                                Model model) {
-        if (pageable.getPageNumber() == 0) {
-            addSampleData();
-        }
-
         Page<Anuncio> page = anuncioRepository.findAll(pageable);
         model.addAttribute("page", page);
         return "index";
     }
 
-    private void addSampleData() {
-        Role role = new Role();
-        role.setRole("ADMIN");
 
-        roleRepository.save(role);
-
-        Usuario usuario = new Usuario("Roca");
-        usuario.setEmail("rod@roc.com");
-        usuario.setActive(1);
-        usuario.setSenha(bCryptPasswordEncoder.encode("1234"));
-
-        Endereco endereco = new Endereco();
-
-        endereco.setRua("Rua Edward Quirino Lacerda");
-        endereco.setNumero(216);
-        endereco.setBairro("Residencial Ana Maria do Couto");
-        endereco.setComplemento("nenhum");
-        endereco.setCidade("Campo Grande");
-        endereco.setUf("MS");
-
-        enderecoRepository.save(endereco);
-
-        usuario.setEndereco(endereco);
-        usuario.setRoles(new HashSet<Role>(Arrays.asList(role)));
-        usuarioRepository.save(usuario);
-
-        for (int i = 1; i <= 10; i++) {
-            addImovelSample(i, usuario, endereco);
-        }
-    }
-
-    private void addImovelSample(int i, Usuario usuario, Endereco endereco) {
-        Imovel imovel = new Imovel();
-        imovel.setEndereco(endereco);
-        imovel.setAreaTotalM2(300);
-        imovel.setAreaConstruidaM2(200);
-        imovel.setQtdQuartos(2);
-        imovel.setQtdVagasGaragem(2);
-        imovel.setTemChurrasqueira(false);
-        imovel.setTemPiscina(false);
-        imovel.setTipo(1);
-
-        imovelRepository.save(imovel);
-
-        Anuncio anuncio = new Anuncio();
-        anuncio.setImovel(imovel);
-        anuncio.setAnunciante(usuario);
-        anuncio.setTipo(1);
-        anuncio.setTitulo("Casa Térrea - ótimo preço " + i);
-        anuncio.setPreco(180.000);
-        anuncio.setObservacoes("Excelente casa com amplo espaço");
-
-        anuncioRepository.save(anuncio);
-    }
 
     //    @RequestMapping(value="/logout", method = RequestMethod.GET)
 //    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {

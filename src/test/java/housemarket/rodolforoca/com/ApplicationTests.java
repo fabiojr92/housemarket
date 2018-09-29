@@ -10,11 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(classes = {WebMvcConfig.class, WebSecurityConfig.class})
+@ContextConfiguration(classes = { WebMvcConfig.class} )
 public class ApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }
