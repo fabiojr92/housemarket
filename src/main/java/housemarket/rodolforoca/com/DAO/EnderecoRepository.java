@@ -1,10 +1,12 @@
 package housemarket.rodolforoca.com.DAO;
 
-import housemarket.rodolforoca.com.Model.Endereco;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import housemarket.rodolforoca.com.Model.Anuncio;
+import housemarket.rodolforoca.com.Model.Endereco;
 
 @Repository
 public interface EnderecoRepository extends CrudRepository<Endereco, Long> {

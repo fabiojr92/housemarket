@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
@@ -31,6 +32,7 @@ import housemarket.rodolforoca.com.Model.Endereco;
 import housemarket.rodolforoca.com.Model.Imovel;
 import housemarket.rodolforoca.com.Model.Role;
 import housemarket.rodolforoca.com.Model.Usuario;
+import housemarket.rodolforoca.com.Service.AnuncioService;
 
 @Controller
 public class IndexController {
@@ -52,6 +54,9 @@ public class IndexController {
 
     @Autowired
     private AnuncioRepository anuncioRepository;
+    
+    @Autowired
+    private AnuncioService anuncioService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -77,21 +82,33 @@ public class IndexController {
 
 
 
-    @RequestMapping("/delete-anuncio")
-    public String deletarAnuncio(int id) {
-        Anuncio anuncio = anuncioRepository.findById(id);
-        anuncioRepository.delete(anuncio);
-        imovelRepository.delete(anuncio.getImovel());
-        enderecoRepository.delete(anuncio.getImovel().getEndereco());
-
-        return "redirect:/index";
-    }
+    //@RequestMapping("/delete-anuncio")
+   // public String deletarAnuncio(int id) {
+        //Anuncio anuncio = anuncioRepository.findById(id);
+       // anuncioRepository.delete(anuncio);
+       // imovelRepository.delete(anuncio.getImovel());
+       // enderecoRepository.delete(anuncio.getImovel().getEndereco());
+//
+      //  return "redirect:/index";
+   // }
     
     @RequestMapping(value="/detalhesAnuncio/{id}", method=RequestMethod.GET)
     public ModelAndView detalhesAnuncio(@PathVariable("id") int id) {
-        Anuncio anuncio = anuncioRepository.findById(id);
+        Optional<Anuncio> anuncio = anuncioRepository.findById(id);
     	ModelAndView mv = new ModelAndView("visualizarAnuncio");
     	mv.addObject("anuncio", anuncio);
     	return mv;
     }
+    
+    @RequestMapping(value = {"/pesquisar"}, method = RequestMethod.GET)
+    public ModelAndView pesquisar(@RequestParam("search") String search) {
+        ModelAndView mv = new ModelAndView();
+        List<Anuncio> anuncio = anuncioService.buscarAnunciosPorPesquisa(search);
+        mv.addObject("anuncio", anuncio);
+        mv.setViewName("index");
+
+        return mv;
+    }
+    
+    
 }
