@@ -19,5 +19,12 @@ public interface AnuncioRepository extends PagingAndSortingRepository<Anuncio, L
             "e.CIDADE ILIKE %?1%", nativeQuery = true)
 	Page<Anuncio> findAnunciosBySearch(String search, Pageable pageable);
 
+	@Query(value =  "SELECT * FROM ANUNCIO a " + "JOIN IMOVEL i ON a.imovel_id = i.imovel_id " +
+			"JOIN ENDERECO e ON i.ENDERECO_ID = e.ENDERECO_ID " +
+			"WHERE e.RUA ILIKE %?1% OR " +
+			"e.BAIRRO ILIKE %?1% OR " +
+			"e.CIDADE ILIKE %?1%", nativeQuery = true)
+	List<Anuncio> findAnunciosByTerm(String search);
+
 	Anuncio findById(int id);
 }

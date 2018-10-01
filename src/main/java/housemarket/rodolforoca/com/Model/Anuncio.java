@@ -16,7 +16,7 @@ public class Anuncio {
 
     private String observacoes;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Usuario anunciante;
 
@@ -28,8 +28,28 @@ public class Anuncio {
     
     private double preco;
 
+    @Transient
+    private String value;
+    @Transient
+    private String data;
 
-	public Anuncio() {
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Anuncio() {
     }
 
     public int getId() {

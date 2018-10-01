@@ -1,23 +1,17 @@
 package housemarket.rodolforoca.com.Controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.sql.DataSource;
 
+import housemarket.rodolforoca.com.Service.AnuncioSuggestions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import housemarket.rodolforoca.com.DAO.AnuncioRepository;
 import housemarket.rodolforoca.com.DAO.RoleRepository;
@@ -35,7 +29,7 @@ public class IndexController {
 
     @Autowired
     private AnuncioRepository anuncioRepository;
-    
+
 //    @Autowired
 //    private AnuncioService anuncioService;
 
@@ -82,7 +76,38 @@ public class IndexController {
     	mv.addObject("anuncio", anuncio);
     	return mv;
     }
-    
+
+    @RequestMapping(value = "/suggestion", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public AnuncioSuggestions autocompleteSuggestions(@RequestParam("searchTerm") String searchTerm) {
+        System.out.println("searchTerm: " + searchTerm);
+
+        ArrayList<Anuncio> suggestions = new ArrayList<>();
+
+        List<Anuncio> anuncios = anuncioRepository.findAnunciosByTerm(searchTerm);
+
+        for (Anuncio anuncio : anuncios) {
+            String lowerRua = anuncio.getImovel().getEndereco().getRua().toLowerCase();
+            String lowerBairro = anuncio.getImovel().getEndereco().getBairro().toLowerCase();
+            String lowerCidade = anuncio.getImovel().getEndereco().getCidade().toLowerCase();
+            if (lowerRua.contains(searchTerm.toLowerCase()) || lowerBairro.contains(searchTerm.toLowerCase()) || lowerCidade.contains(searchTerm.toLowerCase())) {
+
+                anuncio.setValue(anuncio.getTitulo());
+                anuncio.setData(anuncio.getId() + "");
+                suggestions.add(anuncio);
+            }
+        }
+
+        // max 20 elementos
+        int n = suggestions.size() > 20 ? 20 : suggestions.size();
+        List<Anuncio> sulb = new ArrayList<>(suggestions.subList(0, n));
+
+        AnuncioSuggestions sw = new AnuncioSuggestions();
+        sw.setSuggestions(sulb);
+        return sw;
+    }
+
+
     @RequestMapping(value = {"/pesquisar"}, method = RequestMethod.GET)
     public ModelAndView pesquisar(@RequestParam("search") String search, @PageableDefault(size = 10) Pageable pageable,
                                   Model model) {

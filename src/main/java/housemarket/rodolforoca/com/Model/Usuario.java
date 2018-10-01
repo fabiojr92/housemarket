@@ -23,7 +23,7 @@ public class Usuario {
 
     private int active;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
