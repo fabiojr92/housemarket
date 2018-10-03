@@ -29,11 +29,20 @@
 				<li class="nav-item">
 					<a href="cadastro-anuncio" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Anunciar</a>
 				</li>
-				<li class="nav-item">
-					<a href="cadastro-anunciante" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cadastre-se</a>
+				<li class="nav-item" sec:authorize="isAuthenticated()">
+					<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" th:href="@{/dashboard}">Minha Conta</a>
 				</li>
-				<li class="nav-item">
-					<a href="logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
+				
+				<li class="nav-item" sec:authorize="isAuthenticated()">
+					<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" th:href="@{/}">Logout</a>				
+				</li>
+				
+				<li class="nav-item" sec:authorize="isAnonymous()">
+					<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" th:href="@{/cadastro-anunciante}">Cadastre-se</a>
+				</li>
+				
+				<li class="nav-item" sec:authorize="isAnonymous()">
+					<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" th:href="@{/login}">Login</a>
 				</li>
 			</ul>
 
@@ -60,8 +69,8 @@
 					<td>
 						<div class="btn-group btn-group-sm pull-right">
 					   		<a class="btn btn-outline-secondary" th:href="@{/detalhesAnuncio/{id}(id=${anuncio.id})}">Detalhes</a>
-					   		<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}">Editar</a>
-					   		<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
+					   		<a sec:authorize="isAuthenticated()" class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}">Editar</a>
+					   		<a sec:authorize="isAuthenticated()" class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
 					   </div>
 					</td>
 				</tr>	
