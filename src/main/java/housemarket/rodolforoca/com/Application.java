@@ -145,7 +145,7 @@ public class Application extends SpringBootServletInitializer implements Applica
 		Anuncio novoAnuncio = new Anuncio();
 		novoAnuncio.setImovel(novoImovel);
 		novoAnuncio.setAnunciante(usuario);
-		novoAnuncio.setTipo(1);
+		novoAnuncio.setTipo(0);
 		novoAnuncio.setTitulo("Apartamento caro " + i);
 		novoAnuncio.setPreco(180.000);
 		novoAnuncio.setObservacoes("Excelente ap com amplo espaço");

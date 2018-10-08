@@ -2,6 +2,9 @@ package housemarket.rodolforoca.com.DAO;
 
 
 import housemarket.rodolforoca.com.Application;
+import housemarket.rodolforoca.com.ApplicationTests;
+import housemarket.rodolforoca.com.Config.WebMvcConfig;
+import housemarket.rodolforoca.com.Config.WebSecurityConfig;
 import housemarket.rodolforoca.com.Model.Role;
 import housemarket.rodolforoca.com.Model.Usuario;
 import org.junit.Before;
@@ -10,8 +13,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -19,9 +26,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
+@ContextConfiguration(classes = { WebMvcConfig.class} )
 @DataJpaTest
-public class UsuarioRepositoryTest {
+public class UsuarioRepositoryTest extends ApplicationTests {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -48,7 +56,9 @@ public class UsuarioRepositoryTest {
         entityManager.flush();
     }
 
-
+    @Test
+    public void contextLoads() {
+    }
 
     @Test
     public void findByEmail() {
