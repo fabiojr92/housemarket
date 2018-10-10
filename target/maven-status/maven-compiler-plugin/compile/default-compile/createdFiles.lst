@@ -1,0 +1,4 @@
+br\com\ufms\consoft\webConfig\LoggingAccessDeniedHandler.class
+br\com\ufms\consoft\Locacao.class
+br\com\ufms\consoft\controller\HomeController.class
+br\com\ufms\consoft\config\SecurityConfig.class
