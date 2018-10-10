@@ -70,12 +70,15 @@
 	<h1 align="center">Relatório</h1>
 	<hr>
 	<hr>
-	
-	<h5>Tipo do Relatório - </h5>
+	<div th:object="${tipo}">
+		<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
+	</div>
 	<hr>
-	
-	<h5>Anunciante - </h5>
-	
+
+	<div th:object="${usuario}">
+		<h5>Anunciante - <a class="label" th:text="${usuario.nome}"/></h5>
+	</div>
+
 	<hr>	
 	<hr>
 	<table class="container">

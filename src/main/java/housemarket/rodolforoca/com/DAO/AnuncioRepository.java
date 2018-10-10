@@ -30,11 +30,11 @@ public interface AnuncioRepository extends PagingAndSortingRepository<Anuncio, L
 	@Query(value =  "SELECT * FROM ANUNCIO a " + "JOIN USUARIO u ON a.user_id = u.user_id " + "WHERE u.user_id = ?1 ", nativeQuery = true)
 	Page<Anuncio> findByAnunciante(int id, Pageable pageable);
 
-	@Query(value =  "SELECT * FROM ANUNCIO a WHERE a.tipo = 0 ", nativeQuery = true)
-	List<Anuncio> findAnunciosVenda();
+	@Query(value =  "SELECT * FROM ANUNCIO a " + "JOIN USUARIO u ON a.user_id = u.user_id " + "WHERE u.user_id = ?1 AND a.tipo = 0 ", nativeQuery = true)
+	List<Anuncio> findAnunciosVenda(int userId);
 
-	@Query(value =  "SELECT * FROM ANUNCIO a WHERE a.tipo = 1 ", nativeQuery = true)
-	List<Anuncio> findAnunciosAluguel();
+	@Query(value =  "SELECT * FROM ANUNCIO a " + "JOIN USUARIO u ON a.user_id = u.user_id " + "WHERE u.user_id = ?1 AND a.tipo = 1 ", nativeQuery = true)
+	List<Anuncio> findAnunciosAluguel(int userId);
 
 	Anuncio findById(int id);
 }
