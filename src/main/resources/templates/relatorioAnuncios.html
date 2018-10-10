@@ -99,7 +99,9 @@
 			<tr th:each="anuncio : ${anuncios}">
 				
 				<td th:text="${anuncio.titulo}"></td>
-				<td th:text="${anuncio.preco}"></td>
+				<td>
+					<span>R$ &nbsp<a class="label" th:text="${anuncio.preco}"/></span>
+				</td>
 	
 			</tr>
 			
@@ -121,7 +123,7 @@
 			
 			<td>
 				<div class="btn btn-danger btn-lg active">
-					<a class="label" th:text="${total}"/>
+					 <span>R$ &nbsp<a class="label" th:text="${total}"/></span> 
 				</div>
 			</td>
 		</tr>
