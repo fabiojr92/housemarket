@@ -69,6 +69,23 @@
 
 	<h1 align="center">Relatório</h1>
 	<hr>
+	<div th:object="${tipo}">
+		<ul class="nav nav-pills nav-fill">
+			<li class="nav-item"><h1>Exportar: </h1></li>
+
+			<li class="nav-item">
+				<a class="btn btn-outline-secondary" th:href="@{/export-json/{tipo}(tipo=${tipo})}">JSON</a>
+			</li>
+			<li class="nav-item">
+				<a class="btn btn-outline-secondary" th:href="@{/export-csv/{tipo}(tipo=${tipo})}">CSV</a>
+			</li>
+			<li class="nav-item">
+				<a class="btn btn-outline-secondary" th:href="@{/export-txt/{tipo}(tipo=${tipo})}">TXT</a>
+			</li>
+		</ul>
+	</div>
+
+
 	<hr>
 	<div th:object="${tipo}">
 		<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
@@ -76,7 +93,7 @@
 	<hr>
 
 	<div th:object="${usuario}">
-		<h5>Anunciante - <a class="label" th:text="${usuario.nome}"/></h5>
+		<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
 	</div>
 
 	<hr>	

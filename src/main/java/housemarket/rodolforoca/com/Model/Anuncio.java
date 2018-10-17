@@ -1,6 +1,7 @@
 package housemarket.rodolforoca.com.Model;
 
 import housemarket.rodolforoca.com.Enums.TipoAnuncio;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -9,28 +10,36 @@ public class Anuncio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "anuncio_id")
+    @JsonIgnore
     private int id;
 
     @Column(nullable = false)
     private String titulo;
 
+    @JsonIgnore
     private String observacoes;
 
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private Usuario anunciante;
 
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "imovel_id")
+    @JsonIgnore
     private Imovel imovel;
 
+    @JsonIgnore
     private int tipo;
     
     private double preco;
 
     @Transient
+    @JsonIgnore
     private String value;
+
     @Transient
+    @JsonIgnore
     private String data;
 
     public String getData() {
