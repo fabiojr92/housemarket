@@ -128,26 +128,25 @@ public class RelatorioController {
     public ResponseEntity<Object> convertTXT(@PathVariable("tipo") String tipo) {
         Relatorio relatorio = getRelatorioPorTipo(tipo);
 
-        ObjectMapper mapper = new ObjectMapper();
-        try {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Relatorio de " + relatorio.getTipo() + "\n");
+        builder.append("Anunciante " + relatorio.getAnunciante() + "\n");
+        builder.append("\n");
+        builder.append("Anúncios");
+        builder.append("\n");
 
-            String buf = mapper.writeValueAsString(relatorio);
-
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.parseMediaType("text/plain"))
-                    .header("Content-Disposition", "attachment; filename=\"relatorio.txt\"")
-                    .body(buf);
-        } catch (JsonGenerationException e) {
-            e.printStackTrace();
-            return ResponseEntity.noContent().build();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-            return ResponseEntity.noContent().build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.noContent().build();
+        for (Anuncio anuncio: relatorio.getAnuncios()) {
+            builder.append(anuncio.getTitulo() + "    " + "R$ " + anuncio.getPreco() + "\n");
         }
+
+        builder.append("\n");
+        builder.append("Total " + "    " + "R$ " + relatorio.getTotal());
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.parseMediaType("text/plain"))
+                .header("Content-Disposition", "attachment; filename=\"relatorio.txt\"")
+                .body(builder.toString());
     }
 
     // Helpers

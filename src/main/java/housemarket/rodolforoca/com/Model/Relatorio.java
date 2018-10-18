@@ -14,7 +14,7 @@ public class Relatorio {
     public void setAnuncios(Iterable<Anuncio> anuncios) {
         this.anuncios = anuncios;
     }
-    
+
     public String getTipo() {
         return tipo;
     }
