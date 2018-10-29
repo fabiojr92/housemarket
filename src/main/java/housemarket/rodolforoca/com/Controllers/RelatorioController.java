@@ -112,14 +112,18 @@ public class RelatorioController {
 
         csvWriter.writeHeader(header);
 
-        csvWriter.write(relatorio, "anunciante");
-        csvWriter.write(relatorio, "tipo");
-
-        for (Anuncio anuncio : relatorio.getAnuncios()) {
-            csvWriter.write(anuncio, header);
+        for (String s: relatorio.getOrder()) {
+            if (s.equals("h")) {
+                csvWriter.write(relatorio, "anunciante");
+                csvWriter.write(relatorio, "tipo");
+            } else if (s.equals("b")) {
+                for (Anuncio anuncio : relatorio.getAnuncios()) {
+                    csvWriter.write(anuncio, header);
+                }
+            } else {
+                csvWriter.write(relatorio, "total");
+            }
         }
-        csvWriter.write(relatorio, "total");
-
         csvWriter.close();
     }
 
@@ -129,18 +133,28 @@ public class RelatorioController {
         Relatorio relatorio = getRelatorioPorTipo(tipo);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("Relatorio de " + relatorio.getTipo() + "\n");
-        builder.append("Anunciante " + relatorio.getAnunciante() + "\n");
-        builder.append("\n");
-        builder.append("Anúncios");
-        builder.append("\n");
 
-        for (Anuncio anuncio: relatorio.getAnuncios()) {
-            builder.append(anuncio.getTitulo() + "    " + "R$ " + anuncio.getPreco() + "\n");
+        for (String s: relatorio.getOrder()) {
+            if (s.equals("h")) {
+                builder.append("\n");
+                builder.append("Relatorio de " + relatorio.getTipo() + "\n");
+                builder.append("Anunciante " + relatorio.getAnunciante() + "\n");
+                builder.append("\n");
+            } else if (s.equals("b")) {
+                builder.append("\n");
+                builder.append("Anúncios");
+                builder.append("\n");
+
+                for (Anuncio anuncio: relatorio.getAnuncios()) {
+                    builder.append(anuncio.getTitulo() + "    " + "R$ " + anuncio.getPreco() + "\n");
+                }
+                builder.append("\n");
+            } else {
+                builder.append("\n");
+                builder.append("Total " + "    " + "R$ " + relatorio.getTotal());
+                builder.append("\n");
+            }
         }
-
-        builder.append("\n");
-        builder.append("Total " + "    " + "R$ " + relatorio.getTotal());
 
         return ResponseEntity
                 .ok()
@@ -179,10 +193,10 @@ public class RelatorioController {
         Relatorio relatorio = new Relatorio();
         relatorio.setTipo(tipo);
         relatorio.setAnunciante(usuario.getNome());
-//        relatorio.setAnuncios(anuncios);
         relatorio.setAnuncios(anuncios);
         relatorio.setTotal(anuncios);
 
+        relatorio.setOrder(new String[]{"f", "h", "b"});
         return relatorio;
     }
 

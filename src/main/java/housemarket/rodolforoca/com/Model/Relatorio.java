@@ -1,11 +1,16 @@
 package housemarket.rodolforoca.com.Model;
 
+import java.lang.reflect.Array;
+
 public class Relatorio {
 
     private String tipo;
     private String anunciante;
     private Iterable<Anuncio> anuncios;
     private double total;
+    private String[] order; // h = header, b = body, f = footer
+
+
 
     public Iterable<Anuncio> getAnuncios() {
         return anuncios;
@@ -42,5 +47,13 @@ public class Relatorio {
         }
 
         this.total = total;
+    }
+
+    public String[] getOrder() {
+        return order;
+    }
+
+    public void setOrder(String[] order) {
+        this.order = order;
     }
 }
