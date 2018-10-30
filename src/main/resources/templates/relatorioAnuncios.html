@@ -86,42 +86,65 @@
 	</div>	
 	
 	<hr>
-	<div th:object="${tipo}">	
+	<div th:object="${tipo}" th:object2="${tipoTemplate}">
 		<ul class="nav nav-pills nav-fill">
 			<li class="nav-item"><h5>Formato: </h5></li>
-		
+
 			<li class="nav-item">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="0" checked>
+					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="0" th:field="${tipoTemplate}" checked/>
 					<label class="form-check-label" for="exampleRadios1">
 				    	Cabeçalho + Corpo + Rodapé
 					</label>
 				</div>
 			</li>
-			
-			<li class="nav-item">	
+			<li class="nav-item">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
+					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="1" th:field="${tipoTemplate}">
 					<label class="form-check-label" for="exampleRadios1">
 				    	Rodapé + Corpo + Cabeçalho
 					</label>
 				</div>
 			</li>
-			
 			<li class="nav-item">
-				<a class="btn btn-outline-secondary btn-sm" th:href="@{//{tipo}(tipo=${tipo})}">ATUALIZAR</a>
+				<div th:switch="${tipo}">
+					<p th:case="'Aluguel'"><a class="btn btn-outline-secondary btn-sm" th:href="@{/relatorio-aluguel/{tipoTemplate}(tipoTemplate=${tipoTemplate})}">ATUALIZAR</a></p>
+					<p th:case="'Venda'"><a class="btn btn-outline-secondary btn-sm" th:href="@{/relatorio-venda/{tipoTemplate}(tipoTemplate=${tipoTemplate})}">ATUALIZAR</a></p>
+				</div>
 			</li>
-		</ul>	
-	</div>	
-
-	<hr>
-	<div th:object="${tipo}">
-		<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
+		</ul>
 	</div>
-	<hr>
 
-	<div th:object="${usuario}">
-		<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
+	<hr>
+	<div th:switch="${tipoTemplate}">
+		<p th:case="'0'">
+			<div th:object="${tipo}">
+				<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
+			</div>
+			<hr>
+
+			<div th:object="${usuario}">
+				<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
+			</div>
+		</p>
+		<p th:case="'1'">
+			<table>
+				<tr th:object="${total}">
+
+					<td>
+						<div class="btn-outline-dark btn-lg active">
+							<a class="label" th:text="Total"/>
+						</div>
+					</td>
+
+					<td>
+						<div class="btn btn-danger btn-lg active">
+							<span>R$ &nbsp<a class="label" th:text="${total}"/></span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</p>
 	</div>
 
 	<hr>	
@@ -157,7 +180,36 @@
 				<hr>
 			</td>
 		</tr>
-		
+
+		<tr th:switch="${tipoTemplate}">
+			<td th:case="'0'">
+				<div th:object="${tipo}">
+					<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
+				</div>
+				<hr>
+
+				<div th:object="${usuario}">
+					<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
+				</div>
+			</td>
+			<td th:case="'1'">
+				<tr th:object="${total}">
+					<td>
+						<div class="btn-outline-dark btn-lg active">
+							<a class="label" th:text="Total"/>
+						</div>
+					</td>
+
+					<td>
+						<div class="btn btn-danger btn-lg active">
+							<span>R$ &nbsp<a class="label" th:text="${total}"/></span>
+						</div>
+					</td>
+				</tr>
+
+			</td>
+		</tr>
+
 		<tr th:object="${total}">
 			
 			<td>

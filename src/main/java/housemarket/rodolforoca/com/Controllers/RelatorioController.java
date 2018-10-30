@@ -46,18 +46,28 @@ public class RelatorioController {
     private UsuarioRepository usuarioRepository;
 
 
-    @RequestMapping(value = {"/relatorio-venda"}, method = RequestMethod.GET)
-    public ModelAndView listaAnunciosVenda() {
-        Relatorio relatorio = getRelatorioPorTipo("Venda");
+    @RequestMapping(value = {"/relatorio-venda/{tipoTemplate}"}, method = RequestMethod.GET)
+    public ModelAndView listaAnunciosVenda(@PathVariable("tipoTemplate") String tipoTemplate) {
+        int t = Integer.parseInt(tipoTemplate);
 
-        return getRelatorioMV(relatorio);
+        Relatorio relatorio = getRelatorioPorTipo("Venda");
+        relatorio.setOrder(getRelatorioTemplate(t));
+
+        ModelAndView mv = getRelatorioMV(relatorio);
+        mv.addObject(tipoTemplate, "tipoTemplate");
+        return mv;
     }
 
-    @RequestMapping(value = {"/relatorio-aluguel"}, method = RequestMethod.GET)
-    public ModelAndView listaAnunciosAluguel() {
-        Relatorio relatorio = getRelatorioPorTipo("Aluguel");
+    @RequestMapping(value = {"/relatorio-aluguel/{tipoTemplate}"}, method = RequestMethod.GET)
+    public ModelAndView listaAnunciosAluguel(@PathVariable("tipoTemplate") String tipoTemplate) {
+        int t = Integer.parseInt(tipoTemplate);
 
-        return getRelatorioMV(relatorio);
+        Relatorio relatorio = getRelatorioPorTipo("Aluguel");
+        relatorio.setOrder(getRelatorioTemplate(t));
+
+        ModelAndView mv = getRelatorioMV(relatorio);
+        mv.addObject(tipoTemplate, "tipoTemplate");
+        return mv;
     }
 
     @RequestMapping(value="/export-json/{tipo}", produces = "application/json")
@@ -196,7 +206,6 @@ public class RelatorioController {
         relatorio.setAnuncios(anuncios);
         relatorio.setTotal(anuncios);
 
-        relatorio.setOrder(new String[]{"f", "h", "b"});
         return relatorio;
     }
 
@@ -218,5 +227,15 @@ public class RelatorioController {
         Iterable<Anuncio> anuncios = anuncioRepository.findAnunciosAluguel(usuarioID);
 
         return anuncios;
+    }
+
+    private String[] getRelatorioTemplate(int tipo) {
+        switch (tipo) {
+            case 0:
+                return new String[]{"h", "b", "f"};
+
+            default:
+                return new String[]{"f", "b", "h"};
+        }
     }
 }
