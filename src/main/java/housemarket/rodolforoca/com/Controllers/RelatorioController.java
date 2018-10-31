@@ -54,7 +54,7 @@ public class RelatorioController {
         relatorio.setOrder(getRelatorioTemplate(t));
 
         ModelAndView mv = getRelatorioMV(relatorio);
-        mv.addObject(tipoTemplate, "tipoTemplate");
+        mv.addObject("tipoTemplate", tipoTemplate);
         return mv;
     }
 
@@ -66,14 +66,17 @@ public class RelatorioController {
         relatorio.setOrder(getRelatorioTemplate(t));
 
         ModelAndView mv = getRelatorioMV(relatorio);
-        mv.addObject(tipoTemplate, "tipoTemplate");
+        mv.addObject("tipoTemplate", tipoTemplate);
         return mv;
     }
 
-    @RequestMapping(value="/export-json/{tipo}", produces = "application/json")
+    @RequestMapping(value="/export-json/{tipo}/{tipoTemplate}", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<Object> convertJson(@PathVariable("tipo") String tipo) {
+    public ResponseEntity<Object> convertJson(@PathVariable("tipo") String tipo, @PathVariable("tipoTemplate") String tipoTemplate) {
+        int t = Integer.parseInt(tipoTemplate);
+
         Relatorio relatorio = getRelatorioPorTipo(tipo);
+        relatorio.setOrder(getRelatorioTemplate(t));
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -99,10 +102,13 @@ public class RelatorioController {
         }
     }
 
-    @RequestMapping(value="/export-csv/{tipo}")
+    @RequestMapping(value="/export-csv/{tipo}/{tipoTemplate}")
     @ResponseBody
-    public void convertCSV(@PathVariable("tipo") String tipo, HttpServletResponse response) throws IOException {
+    public void convertCSV(@PathVariable("tipo") String tipo, @PathVariable("tipoTemplate") String tipoTemplate, HttpServletResponse response) throws IOException {
+        int t = Integer.parseInt(tipoTemplate);
+
         Relatorio relatorio = getRelatorioPorTipo(tipo);
+        relatorio.setOrder(getRelatorioTemplate(t));
 
         String csvFileName = "relatorio.csv";
 
@@ -137,10 +143,13 @@ public class RelatorioController {
         csvWriter.close();
     }
 
-    @RequestMapping(value="/export-txt/{tipo}")
+    @RequestMapping(value="/export-txt/{tipo}/{tipoTemplate}")
     @ResponseBody
-    public ResponseEntity<Object> convertTXT(@PathVariable("tipo") String tipo) {
+    public ResponseEntity<Object> convertTXT(@PathVariable("tipo") String tipo, @PathVariable("tipoTemplate") String tipoTemplate) {
+        int t = Integer.parseInt(tipoTemplate);
+
         Relatorio relatorio = getRelatorioPorTipo(tipo);
+        relatorio.setOrder(getRelatorioTemplate(t));
 
         StringBuilder builder = new StringBuilder();
 

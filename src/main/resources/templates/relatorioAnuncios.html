@@ -69,18 +69,18 @@
 
 	<h1 align="center">Relatório</h1>
 	<hr>
-	<div th:object="${tipo}">
+	<div th:object="${tipo}" th:object2="${tipoTemplate}">
 		<ul class="nav nav-pills nav-fill">
 			<li class="nav-item"><h1>Exportar: </h1></li>
 
 			<li class="nav-item">
-				<a class="btn btn-outline-secondary" th:href="@{/export-json/{tipo}(tipo=${tipo})}">JSON</a>
+				<a class="btn btn-outline-secondary" th:href="@{/export-json/{tipo}/{tipoTemplate}(tipo=${tipo}, tipoTemplate=${tipoTemplate})}">JSON</a>
 			</li>
 			<li class="nav-item">
-				<a class="btn btn-outline-secondary" th:href="@{/export-csv/{tipo}(tipo=${tipo})}">CSV</a>
+				<a class="btn btn-outline-secondary" th:href="@{/export-csv/{tipo}/{tipoTemplate}(tipo=${tipo}, tipoTemplate=${tipoTemplate})}}">CSV</a>
 			</li>
 			<li class="nav-item">
-				<a class="btn btn-outline-secondary" th:href="@{/export-txt/{tipo}(tipo=${tipo})}">TXT</a>
+				<a class="btn btn-outline-secondary" th:href="@{/export-txt/{tipo}/{tipoTemplate}(tipo=${tipo}, tipoTemplate=${tipoTemplate})}">TXT</a>
 			</li>
 		</ul>
 	</div>	
@@ -92,7 +92,10 @@
 
 			<li class="nav-item">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="0" th:field="${tipoTemplate}" checked/>
+					<!--<input type="radio" th:field="${tipoTemplate}" th:value="'0'" checked="true">-->
+					<!--<label th:for="${#ids.prev('tipoTemplate')}">Cabeçalho + Corpo + Rodapé</label>-->
+
+					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" th:field="${tipoTemplate}" th:value="'0'" checked/>
 					<label class="form-check-label" for="exampleRadios1">
 				    	Cabeçalho + Corpo + Rodapé
 					</label>
@@ -100,9 +103,9 @@
 			</li>
 			<li class="nav-item">
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="1" th:field="${tipoTemplate}">
-					<label class="form-check-label" for="exampleRadios1">
-				    	Rodapé + Corpo + Cabeçalho
+					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" th:field="${tipoTemplate}" th:value="'1'"/>
+					<label class="form-check-label" for="exampleRadios2">
+						Rodapé + Corpo + Cabeçalho
 					</label>
 				</div>
 			</li>
@@ -116,8 +119,8 @@
 	</div>
 
 	<hr>
-	<div th:switch="${tipoTemplate}">
-		<p th:case="'0'">
+	<div>
+		<span th:if="${tipoTemplate}=='0'">
 			<div th:object="${tipo}">
 				<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
 			</div>
@@ -126,8 +129,8 @@
 			<div th:object="${usuario}">
 				<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
 			</div>
-		</p>
-		<p th:case="'1'">
+		</span>
+		<span th:if="${tipoTemplate}=='1'">
 			<table>
 				<tr th:object="${total}">
 
@@ -144,10 +147,9 @@
 					</td>
 				</tr>
 			</table>
-		</p>
+		</span>
 	</div>
-
-	<hr>	
+	<hr>
 	<hr>
 	<table class="container">
 		<thead>
@@ -180,53 +182,34 @@
 				<hr>
 			</td>
 		</tr>
-
-		<tr th:switch="${tipoTemplate}">
-			<td th:case="'0'">
-				<div th:object="${tipo}">
-					<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
-				</div>
-				<hr>
-
-				<div th:object="${usuario}">
-					<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
-				</div>
-			</td>
-			<td th:case="'1'">
+	</table>
+	<div>
+		<span th:if="${tipoTemplate}=='1'">
+			<div th:object="${tipo}">
+				<h5> Tipo do Relatório - <a class="label" th:text="${tipo}"/></h5>
+			</div>
+			<hr>
+			<div th:object="${usuario}">
+				<h5>Anunciante - <a class="label" th:text="${usuario}"/></h5>
+			</div>
+		</span>
+			<span th:if="${tipoTemplate}=='0'">
+			<table>
 				<tr th:object="${total}">
 					<td>
 						<div class="btn-outline-dark btn-lg active">
 							<a class="label" th:text="Total"/>
 						</div>
 					</td>
-
 					<td>
 						<div class="btn btn-danger btn-lg active">
 							<span>R$ &nbsp<a class="label" th:text="${total}"/></span>
 						</div>
 					</td>
 				</tr>
-
-			</td>
-		</tr>
-
-		<tr th:object="${total}">
-			
-			<td>
-				<div class="btn-outline-dark btn-lg active">
-					<a class="label" th:text="Total"/>
-				</div>
-			</td>
-			
-			<td>
-				<div class="btn btn-danger btn-lg active">
-					 <span>R$ &nbsp<a class="label" th:text="${total}"/></span> 
-				</div>
-			</td>
-		</tr>
-		
-	</table>
-
+			</table>
+		</span>
+	</div>
 </div>
 
 <div class="p-3 mb-2 bg-primary text-white">
