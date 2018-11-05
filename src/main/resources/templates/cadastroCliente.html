@@ -32,9 +32,9 @@
                     <li class="nav-item">
                         <a href="cadastro-anunciante" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cadastro Anunciante</a>
                     </li>
-                    <li class="nav-item" sec:authorize="isAnonymous()">
-                    	<a class="btn btn-primary btn-lg" role="button" aria-pressed="true" th:href="@{/cadastro-cliente}">Cadastro Cliente</a>
-                	</li>
+                    <li class="nav-item">
+                        <a href="cadastro-cliente" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cadastro Cliente</a>
+                    </li>
                     <li class="nav-item">
                         <a href="login" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Login</a>
                     </li>
@@ -50,12 +50,12 @@
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h5>Cadastro de Anunciantes</h5>
+                <h5>Cadastro de Clientes</h5>
             </div>
             
             <div class="panel-body">
                 
-                <form class="form-horizontal" th:object="${usuario}" th:object2="${endereco}" th:action="@{/salvar-anunciante}" method="POST">
+                <form class="form-horizontal" th:object="${usuario}" th:object2="${endereco}" th:action="@{/salvar-cliente}" method="POST">
                     
                     <div class="form-group">
                         
@@ -93,55 +93,6 @@
                                 <div class="col-md-2" th:classappend="${#fields.hasErrors('senha')}? 'has-error'">
                                     <label>Senha</label>
                                     <input type="password" class="form-control input-sm" th:field="*{senha}"/>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.rua')}? 'has-error'">
-                                    <label>Endereço</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{endereco.rua}" maxlength="150" placeholder="Informe o endereço"/>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.numero')}? 'has-error'">
-                                    <label>Número</label>
-                                    <input type="number" class="form-control input-sm" th:field="*{endereco.numero}" maxlength="150" placeholder="Informe o número"/>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.bairro')}? 'has-error'">
-                                    <label>Bairro</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{endereco.bairro}" maxlength="150" placeholder="Informe o bairro"/>
-                                </div>
-                            </div>
-                           
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.complemento')}? 'has-error'">
-                                    <label>Complemento</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{endereco.complemento}" maxlength="150" placeholder="Informe o complemento"/>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.cidade')}? 'has-error'">
-                                    <label>Cidade</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{endereco.cidade}" maxlength="150" placeholder="Informe a cidade"/>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco.uf')}? 'has-error'">
-                                    <label>Estado (UF)</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{endereco.uf}" maxlength="150" placeholder="Informe o estado"/>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                                <div class="col-md-4" th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
-                                    <label>Telefone</label>
-                                    <input type="text" class="form-control input-sm" th:field="*{telefone}" placeholder="Informe o telefone"/>
                                 </div>
                             </div>
 

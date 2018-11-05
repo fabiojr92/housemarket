@@ -30,7 +30,7 @@ public class CadastroClienteController {
 
     @RequestMapping("/cadastro-cliente")
     public ModelAndView cadastroCliente(Usuario usuario) {
-        ModelAndView mv = new ModelAndView("/cadastroAnunciante");
+        ModelAndView mv = new ModelAndView("/cadastroCliente");
         mv.addObject("usuario", usuario);
         return mv;
     }
