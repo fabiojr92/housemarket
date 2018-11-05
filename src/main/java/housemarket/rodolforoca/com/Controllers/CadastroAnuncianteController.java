@@ -51,6 +51,7 @@ public class CadastroAnuncianteController {
         mv.addObject("usuario", usuario);
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         usuario.setActive(1);
+        usuario.setTipo(0);
         Role userRole = roleRepository.findByRole("ADMIN");
         if(userRole == null) {
             userRole = new Role("ADMIN");

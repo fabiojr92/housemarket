@@ -23,6 +23,8 @@ public class Usuario {
 
     private int active;
 
+    private int tipo;
+
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
@@ -72,6 +74,14 @@ public class Usuario {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
     public String getNome() {

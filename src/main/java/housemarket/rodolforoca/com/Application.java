@@ -69,11 +69,16 @@ public class Application extends SpringBootServletInitializer implements Applica
 		Role role = new Role();
 		role.setRole("ADMIN");
 
+		Role clienteRole = new Role();
+		clienteRole.setRole("CLIENTE");
+
 		roleRepository.save(role);
+		roleRepository.save(clienteRole);
 
 		Usuario usuario = new Usuario("Roca");
 		usuario.setEmail("rod@roc.com");
 		usuario.setActive(1);
+		usuario.setTipo(0);
 		usuario.setSenha(bCryptPasswordEncoder.encode("1234"));
 
 		Endereco endereco = new Endereco();
