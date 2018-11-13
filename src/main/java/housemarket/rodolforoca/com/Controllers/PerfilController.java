@@ -46,9 +46,32 @@ public class PerfilController {
 
         Page<Anuncio> page = anuncioRepository.findByAnunciante(usuario.getId(), pageable);
         model.addAttribute("page", page);
+        model.addAttribute("user", usuario);
 
         ModelAndView mv = new ModelAndView("perfilAnunciante");
         mv.addObject(page);
+        mv.addObject(usuario);
+
+        return mv;
+    }
+
+    @RequestMapping(value={"/perfil-cliente"}, method = RequestMethod.GET)
+    public ModelAndView listaAnunciosCurtidos(@PageableDefault(size = 10) Pageable pageable,
+                                          Model model) {
+
+        String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
+        Usuario usuario = usuarioRepository.findByEmail(email);
+
+
+        Iterable<Anuncio> anuncios = usuario.getAnuncios();
+
+        model.addAttribute("anuncios", anuncios);
+        model.addAttribute("user", usuario);
+
+        ModelAndView mv = new ModelAndView("perfilAnunciante");
+        mv.addObject(anuncios);
+        mv.addObject(usuario);
 
         return mv;
     }

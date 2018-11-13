@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import housemarket.rodolforoca.com.DAO.UsuarioRepository;
+import housemarket.rodolforoca.com.Model.Usuario;
 import housemarket.rodolforoca.com.Service.AnuncioSuggestions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,12 +38,19 @@ public class IndexController {
     @Autowired
     private AnuncioRepository anuncioRepository;
 
-//    @Autowired
-//    private AnuncioService anuncioService;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView listaAnuncios(@PageableDefault(size = 10) Pageable pageable,
                                Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+            Usuario usuario = usuarioRepository.findByEmail(email);
+            model.addAttribute("user", usuario);
+        }
 
         Page<Anuncio> page = anuncioRepository.findAll(pageable);
         model.addAttribute("page", page);
@@ -80,6 +90,22 @@ public class IndexController {
     	ModelAndView mv = new ModelAndView("visualizarAnuncio");
     	mv.addObject("anuncio", anuncio);
     	return mv;
+    }
+
+    @RequestMapping(value="/curtirAnuncio/{id}", method=RequestMethod.GET)
+    public String curtirAnuncio(@PathVariable("id") int id) {
+        Anuncio anuncio = anuncioRepository.findById(id);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+            Usuario usuario = usuarioRepository.findByEmail(email);
+
+            usuario.getAnuncios().add(anuncio);
+            usuarioRepository.save(usuario);
+        }
+
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/suggestion", method = RequestMethod.GET, produces = "application/json")

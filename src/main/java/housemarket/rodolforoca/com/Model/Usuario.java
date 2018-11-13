@@ -35,6 +35,9 @@ public class Usuario {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_anuncio", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "anuncio_id"))
+    private Set<Anuncio> anuncios;
 
 
     public Usuario(String nome) {
@@ -114,5 +117,13 @@ public class Usuario {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Anuncio> getAnuncios() {
+        return anuncios;
+    }
+
+    public void setAnuncios(Set<Anuncio> anuncios) {
+        this.anuncios = anuncios;
     }
 }

@@ -76,9 +76,10 @@ public class Application extends SpringBootServletInitializer implements Applica
 		roleRepository.save(clienteRole);
 
 		Usuario usuario = new Usuario("Roca");
-		usuario.setEmail("rod@roc.com");
 		usuario.setActive(1);
+		usuario.setEmail("rod@roc.com");
 		usuario.setTipo(0);
+		usuario.setRoles(new HashSet<Role>(Arrays.asList(role)));
 		usuario.setSenha(bCryptPasswordEncoder.encode("1234"));
 
 		Endereco endereco = new Endereco();
@@ -93,8 +94,17 @@ public class Application extends SpringBootServletInitializer implements Applica
 		enderecoRepository.save(endereco);
 
 		usuario.setEndereco(endereco);
-		usuario.setRoles(new HashSet<Role>(Arrays.asList(role)));
+
 		usuarioRepository.save(usuario);
+
+		Usuario cliente = new Usuario("Rods");
+		cliente.setActive(1);
+		cliente.setEmail("rods@rocs.com");
+		cliente.setTipo(1);
+		cliente.setRoles(new HashSet<Role>(Arrays.asList(clienteRole)));
+		cliente.setSenha(bCryptPasswordEncoder.encode("1234"));
+
+		usuarioRepository.save(cliente);
 
 		for (int i = 1; i <= 30; i++) {
 			addImovelSample(i, usuario, endereco);

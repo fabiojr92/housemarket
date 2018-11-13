@@ -71,20 +71,25 @@
 </div>
 
 <div class="container">
+    <div th:if="${user.tipo == 0}">
+        <h1>Relatórios</h1>
+        <h6><em>Estes são os relatórios referentes aos seus anúncios</em></h6>
+        <hr>
 
-    <h1>Relatórios</h1>
-	<h6><em>Estes são os relatórios referentes aos seus anúncios</em></h6>
-    <hr>
-	
-	<h2>Anúncios para Aluguel</h2>
-	<h6><em>Consulte todos seus anúncios que estão disponíveis para ALUGUEL</em></h6>
-    <a class="btn btn-outline-success" role="button" aria-pressed="true" th:href="@{/relatorio-aluguel/{tipoTemplate}(tipoTemplate='1')}">Gerar relatório de ALUGUEL</a>
-    <hr>
-    <h2>Anúncios para Venda</h2>
-    <h6><em>Consulte todos seus anúncios que estão disponíveis para VENDA</em></h6>
-    <a class="btn btn-outline-success" role="button" aria-pressed="true" th:href="@{/relatorio-venda/{tipoTemplate}(tipoTemplate='0')}">Gerar relatório de VENDA</a>
+        <h2>Anúncios para Aluguel</h2>
+        <h6><em>Consulte todos seus anúncios que estão disponíveis para ALUGUEL</em></h6>
+        <a class="btn btn-outline-success" role="button" aria-pressed="true" th:href="@{/relatorio-aluguel/{tipoTemplate}(tipoTemplate='1')}">Gerar relatório de ALUGUEL</a>
+        <hr>
+        <h2>Anúncios para Venda</h2>
+        <h6><em>Consulte todos seus anúncios que estão disponíveis para VENDA</em></h6>
+        <a class="btn btn-outline-success" role="button" aria-pressed="true" th:href="@{/relatorio-venda/{tipoTemplate}(tipoTemplate='0')}">Gerar relatório de VENDA</a>
 
-	<hr>
+        <hr>
+    </div>
+    <div th:if="${user.tipo == 1}" th:object="${user}">
+        <h1>Bem vindo <a th:text="${user.nome}"></a></h1>
+        <hr>
+    </div>
 
 	<table class="container">
         <thead>
@@ -93,7 +98,7 @@
         </tr>
         </thead>
 
-        <tbody>
+        <tbody th:if="${page != null}">
         <tr th:each="anuncio : ${page.content}">
 
             <td th:text="${anuncio.titulo}"></td>
@@ -111,11 +116,27 @@
             </td>
         </tr>
         </tbody>
+        <tbody th:if="${anuncios != null}">
+        <tr th:each="anuncio : ${anuncios}">
+
+            <td th:text="${anuncio.titulo}"></td>
+            <td>
+                <span>R$ &nbsp<a class="label" th:text="${anuncio.preco}"/></span>
+            </td>
+            <td th:text="${anuncio.tipo}"></td>
+
+            <td>
+                <div class="btn-group btn-group-sm pull-right">
+                    <a class="btn btn-outline-secondary" th:href="@{/detalhesAnuncio/{id}(id=${anuncio.id})}">Detalhes</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
 
     </table>
 
 
-	<nav aria-label="Navegação de página">
+	<nav th:if="${page != null}" aria-label="Navegação de página">
 		<ul class="pagination justify-content-center">
 			<div class="pagination justify-content-center">
 	    		<span th:if="${page.hasPrevious()}">
