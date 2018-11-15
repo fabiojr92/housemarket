@@ -101,7 +101,7 @@ public class IndexController {
             String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
             Usuario usuario = usuarioRepository.findByEmail(email);
 
-            usuario.getAnuncios().add(anuncio);
+            usuario.getAnunciosFavoritos().add(anuncio);
             usuarioRepository.save(usuario);
         }
 

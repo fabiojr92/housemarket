@@ -40,10 +40,12 @@
             <li class="nav-item">
 					<a href="index" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Página Inicial</a>
 				</li>
-				
-				<li class="nav-item">
-					<a href="cadastro-anuncio" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Anunciar</a>
-				</li>
+
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <p th:if="${user != null && user.tipo == 0}" >
+                        <a href="cadastro-anuncio" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Anunciar</a>
+                    </p>
+                </li>
 				
 				<li class="nav-item" sec:authorize="isAuthenticated()">
 					<a class="btn btn-primary btn-lg" role="button" aria-pressed="true" th:href="@{/perfil-anunciante}">Minha Conta</a>
@@ -116,8 +118,8 @@
             </td>
         </tr>
         </tbody>
-        <tbody th:if="${anuncios != null}">
-        <tr th:each="anuncio : ${anuncios}">
+        <tbody th:if="${anunciosFavoritos != null}">
+        <tr th:each="anuncio : ${anunciosFavoritos}">
 
             <td th:text="${anuncio.titulo}"></td>
             <td>

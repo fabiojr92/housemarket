@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
-<html lang="=pt-br" 
-	xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="=pt-br"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 		<meta charset="utf-8">
@@ -26,8 +26,10 @@
 				<li class="nav-item">
 					<a href="index" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Página Inicial</a>
 				</li>
-				<li class="nav-item">
-					<a href="cadastro-anuncio" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Anunciar</a>
+				<li class="nav-item" sec:authorize="isAuthenticated()">
+					<p th:if="${user != null && user.tipo == 0}" >
+						<a href="cadastro-anuncio" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Anunciar</a>
+					</p>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()">
 					<a class="btn btn-primary btn-lg" role="button" aria-pressed="true" th:href="@{/dashboard}">Minha Conta</a>
@@ -129,9 +131,11 @@
 						</tr>	
 						
 						<td>
-							<div class="btn-group pull-right">
-						   		<a sec:authorize="isAuthenticated()" class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}" >Editar</a>
-						   		<a sec:authorize="isAuthenticated()" class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
+							<div class="btn-group pull-right" sec:authorize="isAuthenticated()">
+								<p th:if="${user != null && user.tipo == 0}" >
+						   			<a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}" >Editar</a>
+						   			<a class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>
+								</p>
 						   </div>
 						</td>
 				

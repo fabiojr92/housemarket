@@ -1,12 +1,9 @@
 package housemarket.rodolforoca.com.Controllers;
 
-import java.util.*;
-
 import javax.sql.DataSource;
 
 import housemarket.rodolforoca.com.DAO.UsuarioRepository;
 import housemarket.rodolforoca.com.Model.Usuario;
-import housemarket.rodolforoca.com.Service.AnuncioSuggestions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,7 +61,7 @@ public class PerfilController {
         Usuario usuario = usuarioRepository.findByEmail(email);
 
 
-        Iterable<Anuncio> anuncios = usuario.getAnuncios();
+        Iterable<Anuncio> anuncios = usuario.getAnunciosFavoritos();
 
         model.addAttribute("anuncios", anuncios);
         model.addAttribute("user", usuario);

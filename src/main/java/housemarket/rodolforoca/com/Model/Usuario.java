@@ -1,8 +1,6 @@
 package housemarket.rodolforoca.com.Model;
 
 
-import housemarket.rodolforoca.com.Enums.TipoAnunciante;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -37,7 +35,7 @@ public class Usuario {
 
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_anuncio", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "anuncio_id"))
-    private Set<Anuncio> anuncios;
+    private Set<Anuncio> anunciosFavoritos;
 
 
     public Usuario(String nome) {
@@ -119,11 +117,11 @@ public class Usuario {
         this.roles = roles;
     }
 
-    public Set<Anuncio> getAnuncios() {
-        return anuncios;
+    public Set<Anuncio> getAnunciosFavoritos() {
+        return anunciosFavoritos;
     }
 
-    public void setAnuncios(Set<Anuncio> anuncios) {
-        this.anuncios = anuncios;
+    public void setAnunciosFavoritos(Set<Anuncio> anunciosFavoritos) {
+        this.anunciosFavoritos = anunciosFavoritos;
     }
 }

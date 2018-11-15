@@ -134,13 +134,14 @@
 					
 					<td>
 						<div class="btn-group btn-group-sm pull-right">
-							
+							<p>
 					   		<a class="btn btn-outline-secondary" th:href="@{/detalhesAnuncio/{id}(id=${anuncio.id})}">Detalhes</a>
+							</p>
 							<p th:if="${user != null && user.tipo == 1}" >
 								<a class="btn btn-outline-secondary" th:href="@{/curtirAnuncio/{id}(id=${anuncio.id})}">Salvar</a>
 							</p>
 
-							<!--<a sec:authorize="isAuthenticated()" class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}">Editar</a>-->
+								<!--<a sec:authorize="isAuthenticated()" class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${anuncio.id})}">Editar</a>-->
 					   		<!--<a sec:authorize="isAuthenticated()" class="delete btn btn-outline-danger" th:href="@{/delete-anuncio/{id}(id=${anuncio.id})}">Excluir</a>-->
 					   		
 					   </div>
